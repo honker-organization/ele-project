@@ -7,11 +7,11 @@ module.exports = {
       postcss: {
         plugins: [
           require('postcss-px2rem')({
-            remUnit: 3.75,
+            remUnit: 37.5,
           })
         ]
       }
     }
   }
-  
+
 }
