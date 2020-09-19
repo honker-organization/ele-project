@@ -2,7 +2,15 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from '@/router'
 import store from '@/store'
+import { Icon } from 'vant';
+import { Tab, Tabs, DropdownMenu, DropdownItem } from 'vant';
+import 'vant/lib/index.css';
 
+Vue.use(Tab);
+Vue.use(Tabs);
+Vue.use(Icon);
+Vue.use(DropdownMenu);
+Vue.use(DropdownItem);
 Vue.config.productionTip = false
 
 new Vue({
