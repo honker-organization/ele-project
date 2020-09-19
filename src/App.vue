@@ -1,18 +1,18 @@
 <template>
   <div id="app">
-    <!-- <IconDetail></IconDetail> -->
-    <Screen></Screen>
+   <IconDetail></IconDetail> 
+   
   </div>
 </template>
 
 <script>
 import IconDetail from '@/pages/iconDetail'
-import Screen from '@/components/screen'
+
 export default {
   name: 'App',
   components: {
    IconDetail,
-   Screen
+  
   }
 }
 </script>

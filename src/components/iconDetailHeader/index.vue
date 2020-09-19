@@ -1,9 +1,15 @@
 <template>
     <!-- icon详情页 hhb -->
   <div class="headerContainer">
-    <van-tabs background="#0093FF" line-width="140px" line-height="5px" color="white" class="van-tabs" style="height:80px">
+    <van-tabs background="#0093FF" line-width="50px" line-height="2px" color="white" class="van-tabs" style="height:80px">
         <van-tab title-active-color="red" title-style="color:#FFFFFF;font-size:30px;height:70px;background:#0093FF" v-for="(item,index) in tab" :title="item" :key='index+1'>
           
+          <div class="down">
+              <button>
+                <van-icon name="arrow-down" />
+              </button>
+          </div>
+
            <div class="navContainer">
              <van-dropdown-menu  active-color="#3190E8">
                 <van-dropdown-item v-model="value1" :options="option1" />
@@ -19,7 +25,7 @@
               </div>
           </div>
  
-        
+         <Screen style="display:none"></Screen> 
         </van-tab>
       </van-tabs> 
 
@@ -36,7 +42,7 @@
 </template>
 
 <script>
-
+import Screen from '@/components/screen'
 import { Tab, Tabs ,Icon, Card ,Tag,Button,DropdownMenu, DropdownItem } from 'vant';
 export default {
   name: 'iconDetailHeader',
@@ -66,8 +72,9 @@ export default {
   [DropdownMenu.name]:DropdownMenu,
   [DropdownItem.name]: DropdownItem,
   [Button.name]:Button,
-  
-  }
+  Screen
+  },
+
 }
 </script>
 
@@ -82,9 +89,10 @@ export default {
       }
 
       /deep/ .van-tabs__wrap--scrollable .van-tabs__nav--complete .van-tab {
-        margin-top: 10px;
-
+       margin-top: -10px;
       }
+
+      
       .navContainer{
         display: flex;
         justify-content: space-around;
@@ -96,7 +104,7 @@ export default {
         }
         /deep/ .van-dropdown-menu__item{
             height: 40px;
-            
+            line-height: 40px;
 
             .van-ellipsis{
               height: 40px;
@@ -117,5 +125,22 @@ export default {
         }
       }
 
+      .down{
+      position: fixed;
+      top:11px;
+      right: 6px;
+      z-index: 999;
+      box-shadow: rgba(0, 0, 0, 0.1) -3px 0px;
+      button{
+          width: 50px;
+          height: 30px;
+          background: #0093FF;
+          color: white;
+          border: 0;
+        }  
+      }
+
     }
+
+    
 </style>

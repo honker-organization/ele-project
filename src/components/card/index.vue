@@ -42,12 +42,12 @@
 
           <div class="tagContainer">
               <div class="tagItem">
-              <van-tag  type="warning" ize="small" style="margin-right:10px;font-size:20px">减</van-tag>
+              <van-tag  type="warning" size="small" style="margin-right:10px;font-size:11px">减</van-tag>
               <span>满25元减9元，满40元减12元，满55元减18元，满88元减26元，满120元减36元</span>
             </div>
 
             <div class="tagItem">
-              <van-tag  type="primary" size="small" style="margin-right:10px;font-size:20px">配</van-tag>
+              <van-tag  type="primary" size="small" style="margin-right:10px;font-size:11px">配</van-tag>
               <span >配送费立减5元</span>
             </div>
           </div>
@@ -163,8 +163,8 @@ export default {
             white-space: nowrap;
             overflow: hidden;
             margin: 5px;
-            height: 15px;
-            line-height: 15px;
+            height: 20px;
+            line-height: 20px;
         }
       }
 </style>

@@ -1,7 +1,7 @@
 <template>
   <div>
     <IconDetailhHeader></IconDetailhHeader>
-    <Card style="margin-top:150px"></Card>
+    <Card ></Card>
     <Card></Card>
     <Card></Card>
     <Card></Card>

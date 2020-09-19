@@ -121,9 +121,10 @@ export default {
 <style lang="less" scoped>
 
   .screenContainer{
-    
+    margin-top: -100px;
     margin-left: 20px;
     margin-bottom: 100px;
+   
     .serive{
        width: 100%;
       .title{
@@ -138,13 +139,13 @@ export default {
       
       .serviceList{
         margin: 5px 0;
-        width: 100px;
+        width: 90px;
         height: 35px;
         padding: 0 12px;
          float: left;
        
         .serviceItem{
-            width: 110px;
+            width: 90px;
             height: 35px;
             display: flex;
             justify-content: center;
@@ -178,11 +179,14 @@ export default {
     display: flex;
     bottom: 0;
     font-size: 16px;
+    
     .btnLeft{
       width: 50%;
       height: 45px;
       background: #fff;
       color: #333;
+      border: 0;
+    
     }
 
     .btnRight{
@@ -190,6 +194,7 @@ export default {
       height: 45px;
       background: #00d762;
       color: #fff;
+      border: 0;
     }
   }
 </style>
