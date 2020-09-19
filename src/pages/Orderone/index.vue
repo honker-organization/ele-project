@@ -51,6 +51,7 @@
 </template>
 
 <script>
+import '../../config/rem.js'
 export default {
   name: 'OrderOne',
 }
