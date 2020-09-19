@@ -1,0 +1,108 @@
+.header
+  .logo
+    position relative
+    .logoBg
+      width 100%
+      height 200px
+      background url("https://cube.elemecdn.com/f/13/c321aba4095cb09dad9d0f3353bd8png.png?x-oss-process=image/format,webp/resize,w_750")
+      background-size cover
+      background-position center
+    .logoImg
+      width 150px
+      height 150px
+      position absolute
+      left 50%
+      bottom  -30px
+      transform translateX(-50%)
+  .shop
+    .title
+      padding-top 60px
+      display flex
+      justify-content center
+      position relative
+      p
+        font-size 41px
+        font-weight 700
+      .arrow
+        padding-top 20px
+    .sign
+      display flex
+      justify-content center
+      span
+        font-size 22px
+        padding-right 20px
+    .coupon
+      display flex
+      justify-content center
+      font-size: 22px
+      .vipCoupon
+        width 288px
+        height 48px
+        line-height 48px
+        background-color #ffe578
+        display flex
+        justify-content: space-around
+        .price
+          font-size 32px
+      .ordinaryCoupon
+        width 288px
+        height 48px
+        line-height 48px
+        padding-left 15px
+        margin-left 15px
+        background-color #fff4f4
+        display flex
+        justify-content: space-around
+        .price
+          font-size 32px
+    .reduction
+      margin auto
+      width 600px
+      height 40px
+      line-height 40px
+      margin 24px 75px 0
+      display: flex
+      justify-content: space-between
+      font-size: 20px
+      .left
+        height 40px
+        display: flex
+        justify-content: flex-start
+        color: #ff4e33
+        p
+          margin 5px
+          span 
+            display: inline-block
+            padding: 2px 8px
+            border 1px solid rgb(255, 201, 193)
+      .right
+        height 48px
+        line-height 48px
+        padding-right 15px
+        color: #999
+        p
+          position relative
+          &::after
+            content: ''
+            width 0
+            height 0
+            border 8px solid 
+            border-color: #999 transparent transparent
+            position absolute
+            top 45%
+    .notice
+      width 600px
+      height 26px
+      margin 17px 75px 20px
+      line-height 26px
+      font-size: 22px
+      padding-top: 20px
+  
+  .detailContainer
+    .tabs
+      /deep/.title
+        font-size: 30px
+
+
+        
+      
