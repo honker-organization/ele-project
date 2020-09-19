@@ -1,4 +1,4 @@
-const path = require('path')
+const path = require("path");
 
 module.exports = {
   lintOnSave: false,
@@ -6,12 +6,11 @@ module.exports = {
     loaderOptions: {
       postcss: {
         plugins: [
-          require('postcss-px2rem')({
-            remUnit: 3.75,
-          })
-        ]
-      }
-    }
-  }
-  
-}
+          require("postcss-px2rem")({
+            remUnit: 37.5,
+          }),
+        ],
+      },
+    },
+  },
+};
