@@ -6,7 +6,7 @@
         <div class="logoBg"></div>
         <img
           src="https://cube.elemecdn.com/5/84/9B3AB309F4BC594A8C36F80AC9F21jpeg.jpeg?x-oss-process=image/format,webp/resize,w_150"
-          alt=""
+          alt
           class="logoImg"
         />
       </div>
@@ -34,10 +34,18 @@
         </div>
         <div class="reduction">
           <div class="left">
-            <p><span>25减18</span></p>
-            <p><span>50减23</span></p>
-            <p><span>95减44</span></p>
-            <p><span>配送费优惠</span></p>
+            <p>
+              <span>25减18</span>
+            </p>
+            <p>
+              <span>50减23</span>
+            </p>
+            <p>
+              <span>95减44</span>
+            </p>
+            <p>
+              <span>配送费优惠</span>
+            </p>
           </div>
 
           <div class="right">
@@ -64,7 +72,20 @@
     <!-- 商家页 -->
     <!-- <Business /> -->
     <!-- 底部提交 -->
-    <div class="footer"></div>
+    <div class="footer">
+      <div class="fulldep">
+        <span>满25减18元</span>
+        <span>满50减23元</span>
+        <span>满95减44元</span>
+      </div>
+      <div class="cart">
+        <span>未选购商品</span>
+        <div class="price">
+          <span>$满20起送</span>
+          <span>未点必选品</span>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
