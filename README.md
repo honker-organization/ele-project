@@ -1,5 +1,11 @@
 # ele-project
 
+
+## 新增模块
+```
+首页icon的分页
+```
+
 ## Project setup
 ```
 yarn install
