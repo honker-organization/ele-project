@@ -1,6 +1,6 @@
 <template>
 	<div style="background:#f5f5f5">
-		<!-- 附近商家的 -->
+		<!-- 附近商家 -->
 		<div class="merchant">
 			<div class="merchantItem active">附近商家</div>
 			<div class="merchantItem">润燥</div>
@@ -218,7 +218,7 @@ export default {
 		// height: 140px;
 		padding: 10px 0;
 		.merchantList {
-			border:solid 1px blue;
+			// border:solid 1px blue;
 			width: 340px;
 			margin: auto;
 			display: flex;
@@ -236,7 +236,7 @@ export default {
 			.rightContent {
 				width: 240px;
 				height: 120px;
-				border:1px red solid;
+				// border:1px red solid;
 				padding-left: 10px;
 				.title {
 					font-size: 16px;
