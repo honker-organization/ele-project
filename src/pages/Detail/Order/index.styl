@@ -1,13 +1,14 @@
+
 .topAd
-  padding-top 14px
+  padding-top 7px
   img 
     width 91.5%
     height 23.5%
-    margin 0 32px
+    margin 0 16px
 .recommend
   padding-top 32px
   .title
-    font-size: 32px
+    font-size: 32$mypx
     padding-left 32px
     margin-bottom 20px
   .my-swipe
@@ -15,6 +16,9 @@
       width 240px
       margin 0 20px 0 32px
       padding-bottom 32px
+      img
+        width 240px
+        height 240px
       .dishes
         white-space: nowrap;
         text-overflow: ellipsis;
@@ -32,21 +36,29 @@
             font-size: 36px
             color: #ff5339
 
+// 点餐页
 .orderPage
   display flex
   padding-bottom: 137px
   .navigation
-    /deep/.asideItem
+    width 154px
+    background-color: rgb(248,248,248)
+    .asideItem
       display: block
       width 124px
       height 28px
+      line-height 28px
       padding: 35px 15px
+      // 菜品选择列
   .menu
-    height 450px
     .menuItem
+      padding: 20px 0 20px 20px
       display: flex
       .image
         margin-right 20px
+        img
+          width 190px
+          height 190px
       .menuInfo
         padding-bottom: 50px
         padding-right 30px
@@ -67,9 +79,6 @@
           color: #f07373
           .limit
             font-weight 700
-#resetNav/deep/ .van-sidebar
-  width 154px !important
-  text-align: center  
 #infoPrice
   display flex
   justify-content: space-between

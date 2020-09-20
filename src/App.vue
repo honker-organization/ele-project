@@ -1,14 +1,16 @@
 <template>
   <div id="app">
+    <!-- <Delicious /> -->
     <Detail />
   </div>
 </template>
 
 <script>
-import Detail from "./pages/Detail";
+import Delicious from "@/pages/Delicious";
+import Detail from "@/pages/Detail";
 export default {
   name: "App",
-  components: { Detail },
+  components: { Delicious, Detail },
 };
 </script>
 
