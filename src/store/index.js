@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import personal from './personal.js'
+import login from '@/store/login'
 
 Vue.use(Vuex)
 
@@ -18,6 +19,7 @@ export default new Vuex.Store({
   actions,
   getters,
   modules:{
-    personal
+    personal,
+    login
   }
 })
