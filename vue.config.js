@@ -1,5 +1,3 @@
-const path = require('path')
-
 module.exports = {
   lintOnSave: false,
   css: {
@@ -12,6 +10,14 @@ module.exports = {
         ]
       }
     }
+  },
+  devServer: {
+    proxy: {
+      "/api": {
+        target: "https://elm.cangdu.org",
+        changeOrigin: true,
+        pathRewrite: { "^/api": "" }
+      }
+    }
   }
-
 }

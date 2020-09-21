@@ -6,8 +6,8 @@
 </template>
 
 <script>
-import Header from './Header/Header'
-import Recommend from './Recommend/Recommend'
+import Header from './Header'
+import Recommend from './Recommend'
 export default {
   name: '',
   components: {

@@ -12,6 +12,7 @@
     "core-js": "^3.6.5",
     "less": "^3.12.2",
     "less-loader": "^7.0.1",
+    "mockjs": "^1.1.0",
     "path": "^0.12.7",
     "postcss-px2rem": "^0.3.0",
     "vant": "^2.10.7",
