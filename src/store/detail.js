@@ -1,38 +1,63 @@
- import { reqShopInfo } from '@/api/detail'
- import { shop } from './mutation-type'
+import {
+  reqShopInfo,
+  reqFoods,
+  updateFood,
+  reqAddFood,
+  deleteFood,
+} from "@/api/detail";
+import { shop, food, add } from "./mutation-type";
 
- const state = {
-     shopInfo: {}
- }
- const mutations = {
-     shop(state, shopInfo) {
-         state.shopInfo = shopInfo
-     }
- }
- const getters = {
-     menuInfo(state) {
-         return state.shopInfo.menu
-     },
-     recommendInfo(state) {
-         return state.shopInfo.recommend
-     },
-     redpackInfo(state) {
-         return state.shopInfo.redpack
-     },
-     rstInfo(state) {
-         return state.shopInfo.rst
-     }
- }
- const actions = {
-     async getShopInfo({ commit }) {
-         const res = await reqShopInfo()
-         commit('shop', res.data.data)
-     }
- }
+const state = {
+  shopInfo: {},
+  foodInfo: {},
+};
+const mutations = {
+  shop(state, shopInfo) {
+    state.shopInfo = shopInfo;
+  },
+  food(state, foodInfo) {
+    state.foodInfo = foodInfo;
+  },
+};
+const getters = {
+  menuInfo(state) {
+    return state.shopInfo.menu;
+  },
+  recommendInfo(state) {
+    return state.shopInfo.recommend;
+  },
+  redpackInfo(state) {
+    return state.shopInfo.redpack;
+  },
+  rstInfo(state) {
+    return state.shopInfo.rst;
+  },
+};
+const actions = {
+  async getShopInfo({ commit }) {
+    const res = await reqShopInfo();
+    console.log(res);
+    commit("shop", res.data);
+  },
+  async getFoodsInfo({ commit }) {
+    const res = await reqFoods();
+    commit("food", res.data);
+  },
 
- export default {
-     state,
-     mutations,
-     getters,
-     actions
- }
+  async getUpdateFood({ commit }, { foodId, num }) {
+    await updateFood(foodId, num);
+  },
+  async getAddFood({ commit }, { foodId, num, name, price }) {
+    await reqAddFood(foodId, num, name, price);
+  },
+  async delFood({ commit }, { foodId }) {
+    await deleteFood(foodId);
+  },
+};
+
+export default {
+  state,
+  mutations,
+  getters,
+  actions,
+};

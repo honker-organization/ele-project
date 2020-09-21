@@ -6,12 +6,12 @@ module.exports = {
     loaderOptions: {
       postcss: {
         plugins: [
-          require('postcss-px2rem')({
+          require("postcss-px2rem")({
             remUnit: 37.5,
-          })
-        ]
-      }
-    }
+          }),
+        ],
+      },
+    },
   },
   // 解决跨域
   // devServer:{
@@ -23,14 +23,18 @@ module.exports = {
   //     }
   //   }
   // }
-  devServer:{
+  devServer: {
     proxy: {
       "/api": {
         target: "https://elm.cangdu.org", //获取验证码的协议域名
-        pathRewrite: {"^/api" : ""},
-        changeOrigin:true
-      }
-    }
-  }
-  
-}
+        pathRewrite: { "^/api": "" },
+        changeOrigin: true,
+      },
+      "/detail": {
+        target: "http://localhost:3001",
+        pathRewrite: { "^/detail": "" },
+        changeOrigin: true,
+      },
+    },
+  },
+};

@@ -1,5 +1,6 @@
 <template>
   <div>
+    <Detail />
     <router-view></router-view>
   </div>
 </template>

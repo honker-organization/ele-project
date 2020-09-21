@@ -7,7 +7,9 @@
       />
     </div>
     <div class="recommend">
-      <p class="title" ref="title" @scroll="titleScroll($event)">{{recommendInfo[0].name}}</p>
+      <p class="title" ref="title" @scroll="titleScroll($event)">
+        {{ recommendInfo[0].name }}
+      </p>
       <van-swipe
         class="my-swipe"
         :autoplay="3000"
@@ -15,18 +17,28 @@
         :loop="false"
         indicator-color="white"
       >
-        <van-swipe-item v-for="(item, index) in recommendInfo[0].items" :key="index">
+        <van-swipe-item
+          v-for="(item, index) in recommendInfo[0].items"
+          :key="index"
+        >
           <div class="swipItem">
             <img
               src="https://cube.elemecdn.com/b/46/0aab566e756d1fa5bf2fb4ce6595cjpeg.jpeg?x-oss-process=image/resize,m_lfit,w_241/watermark,g_se,x_4,y_4,image_YS8xYS82OGRlYzVjYTE0YjU1ZjJlZmFhYmIxMjM4Y2ZkZXBuZy5wbmc_eC1vc3MtcHJvY2Vzcz1pbWFnZS9yZXNpemUsUF8yOA%3D%3D/quality,q_90/format,webp"
               alt
             />
             <div class="dishes">
-              <div class="cartTitle">{{item.name}}</div>
-              <p class="foodCart">{{`月售9 好评率${item.satisfy_rate_text}%`}}</p>
+              <div class="cartTitle">{{ item.name }}</div>
+              <p class="foodCart">
+                {{ `月售9 好评率${item.satisfy_rate_text}%` }}
+              </p>
               <div class="cartBottom">
-                <p class="price">￥{{item.price}}</p>
-                <van-icon name="add" />
+                <p class="price">￥{{ item.price }}</p>
+                <!-- 这里的逻辑和菜单有差别，留后处理 -->
+                <!-- <div class="foodNum">
+                  <p class="btn-update" @click="depFood(index + 1)">-</p>
+                  <p>{{ foodNum[index + 1] || 0 }}</p>
+                  <p class="btn-update" @click="addFood(food, index + 1)">+</p>
+                </div> -->
               </div>
             </div>
           </div>
@@ -36,16 +48,27 @@
     <div class="orderPage">
       <div class="navigation" id="resetNav">
         <ul>
-          <li class="asideItem" title v-for="(item, index) in menuInfo" :key="item.id">{{item.name}}</li>
+          <li
+            class="asideItem"
+            title
+            v-for="(item, index) in menuInfo"
+            :key="item.id"
+          >
+            {{ item.name }}
+          </li>
         </ul>
       </div>
       <div class="menu">
         <div v-for="(item, index) in menuInfo" :key="item.id">
           <div class="munu-desc">
-            <span class="name-desc">{{item.name_desc}}</span>
-            <span class="desc">{{item.description}}</span>
+            <span class="name-desc">{{ item.name_desc }}</span>
+            <span class="desc">{{ item.description }}</span>
           </div>
-          <div class="menuItem" v-for="(food, index) in item.foods" :key="index">
+          <div
+            class="menuItem"
+            v-for="(food, index) in item.foods"
+            :key="index"
+          >
             <div class="image">
               <img
                 src="https://cube.elemecdn.com/b/8b/5d5838426a19b575fdd4599f19f08jpeg.jpeg?x-oss-process=image/resize,m_lfit,w_141,h_141/watermark,g_se,x_4,y_4,image_YS8xYS82OGRlYzVjYTE0YjU1ZjJlZmFhYmIxMjM4Y2ZkZXBuZy5wbmc_eC1vc3MtcHJvY2Vzcz1pbWFnZS9yZXNpemUsUF8yOA%3D%3D/quality,q_90/format,webp"
@@ -53,23 +76,33 @@
               />
             </div>
             <div class="menuInfo">
-              <p class="infoTitle">{{food.name}}</p>
-              <p class="material">{{food.description}}</p>
+              <p class="infoTitle">{{ food.name }}</p>
+              <p class="material">{{ food.description }}</p>
               <p class="sales">
-                <span>月售{{food.month_sales_text}}份</span>
-                <span>好评率{{food.satisfy_rate_text}}%</span>
+                <span>月售{{ food.month_sales_text }}份</span>
+                <span>好评率{{ food.satisfy_rate_text }}%</span>
               </p>
               <p class="activity">
-                <span>{{food.discount_rate}}折</span>
-                <span>{{food.activity&&food.activity.applicable_quantity_text}}</span>
+                <span>{{ food.discount_rate }}折</span>
+                <span>{{
+                  food.activity && food.activity.applicable_quantity_text
+                }}</span>
                 <span class="limit">剩7份</span>
               </p>
               <div id="infoPrice">
                 <p>
-                  <span>￥{{food.price}}</span>
-                  <del>￥{{food.origin_price}}</del>
+                  <span>￥{{ food.price }}</span>
+                  <del>￥{{ food.origin_price }}</del>
                 </p>
-                <van-icon name="add" />
+                <div class="foodNum">
+                  <p class="btn-update" @click="depFood(index + 1)">
+                    -
+                  </p>
+                  <p>{{ foodNum[index + 1] || 0 }}</p>
+                  <p class="btn-update" @click="addFood(food, index + 1)">
+                    +
+                  </p>
+                </div>
               </div>
             </div>
           </div>
@@ -84,18 +117,33 @@ import "./index.styl";
 import { Swipe, SwipeItem } from "vant";
 import { Icon } from "vant";
 import { Sidebar, SidebarItem } from "vant";
-import { mapGetters } from "vuex";
+import { mapGetters, mapState } from "vuex";
+
 export default {
   name: "Order",
+  props: {
+    // addFood: { type: Function },
+    // depFood: { type: Function },
+    foods: { type: Array },
+    foodNum: { type: Array },
+  },
   data() {
     return {
       activeKey: 0,
+      foodsInfo: {},
     };
   },
+  mounted() {},
   computed: {
     ...mapGetters(["menuInfo", "recommendInfo"]),
   },
   methods: {
+    depFood(id) {
+      this.$emit("depFood", id);
+    },
+    addFood(food, foodId) {
+      this.$emit("addFood", { food, foodId });
+    },
     titleScroll(event) {
       console.log(event);
     },

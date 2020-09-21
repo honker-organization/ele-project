@@ -12,39 +12,39 @@
       </div>
       <div class="shop">
         <div class="title">
-          <p>{{rstInfo.name}}</p>
+          <p>{{ rstInfo.name }}</p>
           <van-icon class="arrow" />
         </div>
         <div class="sign">
           <span>评价4.6</span>
-          <span>{{'月售1079单'}}</span>
-          <span>{{rstInfo.delivery_mode.text}}约40分钟</span>
+          <span>{{ "月售1079单" }}</span>
+          <span>{{ rstInfo.delivery_mode.text }}约40分钟</span>
         </div>
         <div class="coupon">
           <div class="vipCoupon">
-            <p class="price">{{redpackInfo[0].value}}</p>
-            <p>{{redpackInfo[0].title_detail}}</p>
+            <p class="price">{{ redpackInfo[0].value }}</p>
+            <p>{{ redpackInfo[0].title_detail }}</p>
             <p>领取</p>
           </div>
           <div class="ordinaryCoupon">
-            <p class="price">{{redpackInfo[1].value}}</p>
-            <p>{{redpackInfo[1].title_detail}}</p>
+            <p class="price">{{ redpackInfo[1].value }}</p>
+            <p>{{ redpackInfo[1].title_detail }}</p>
             <p>领取</p>
           </div>
         </div>
         <div class="reduction">
           <div class="left">
             <p v-for="(item, index) in rstInfo.activity_tags" :key="index">
-              <span>{{item.text}}</span>
+              <span>{{ item.text }}</span>
             </p>
           </div>
 
           <div class="right">
-            <p>{{rstInfo.activities.length+'个优惠'}}</p>
+            <p>{{ rstInfo.activities.length + "个优惠" }}</p>
           </div>
         </div>
         <div class="notice">
-          <p>{{rstInfo.promotion_info}}</p>
+          <p>{{ rstInfo.promotion_info }}</p>
         </div>
       </div>
     </div>
@@ -53,7 +53,14 @@
       <van-tabs class="tabs" title-active-color="black" title-style="30px">
         <van-tab class="title" title="点餐">
           <!-- 点餐页 -->
-          <Order />
+          <!-- 传递加减菜品的方法和菜品数据 -->
+          <Order
+            @addFood="addFood"
+            @depFood="depFood"
+            :foods="foods"
+            :foodNum="foods"
+            ref="order"
+          />
         </van-tab>
         <van-tab class="title" title="评价">
           <!-- 评价页 -->
@@ -68,34 +75,44 @@
 
     <!-- 底部提交 -->
     <div class="footer">
-      <div class="shopping">
-        <div class="fulldep">
-          <span>{{rstInfo.activities[0].description}}</span>
-        </div>
-        <div class="shopping-list">
-          <div class="shopping-list-title">
-            <span class="left">已选商品</span>
-            <span class="right">清空</span>
+      <transition name="slide-fade">
+        <div class="shopping" ref="collection" :style="collectionTop">
+          <div class="fulldep">
+            <span>{{ rstInfo.activities[0].description }}</span>
           </div>
-          <div class="shopping-list-group">
-            <div class="shopping-list-detail">
-              <p class="name">雪碧</p>
-              <p class="price">
-                <del>￥25</del>
-                <span>￥24.9</span>
-              </p>
-              <p class="num">
-                <span>-</span>
-                <span>5</span>
-                <span>+</span>
-              </p>
+          <div class="shopping-list">
+            <div class="shopping-list-title">
+              <span class="left">已选商品</span>
+              <!-- <span class="right" @touchstart="clearFood">清空</span> -->
+            </div>
+            <div class="shopping-list-group">
+              <div
+                class="shopping-list-detail"
+                v-for="(food, index) in foods"
+                :key="food.id"
+              >
+                <p class="name">{{ food.name }}</p>
+                <p class="price">
+                  <del>￥25</del>
+                  <span>￥{{ food.price }}</span>
+                </p>
+                <div class="num">
+                  <p class="btn-update" @touchstart="depFood(food.id)">
+                    -
+                  </p>
+                  <p>{{ food.num }}</p>
+                  <p class="btn-update" @touchstart="addFood(food, food.id)">
+                    +
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      </transition>
 
       <div class="cart">
-        <div>
+        <div class="cart-order" @touchstart="collect">
           <p>未选购商品</p>
           <!-- <p>
             <span>￥</span>
@@ -103,10 +120,10 @@
           </p>-->
         </div>
 
-        <div>
-          <p>$满20起送</p>
+        <div class="cart-pay">
+          <p>满20起送</p>
           <!-- <span>未点必选品</span> -->
-          <p>去结算</p>
+          <!-- <p>去结算</p> -->
         </div>
       </div>
     </div>
@@ -118,7 +135,6 @@
   -->
 </template>
 
-
 <script>
 import "./index.stylus";
 import "../../config/rem-detail";
@@ -126,27 +142,87 @@ import "../../config/rem-detail";
 import Order from "./Order";
 import Evaluate from "./Evaluate";
 import Business from "./Business";
-import { mapGetters } from "vuex";
+import { mapGetters, mapState } from "vuex";
 export default {
   name: "Delicious",
   data() {
     return {
       show: false,
+      collectionTop: {
+        top: "600px",
+      },
+      foodNum: [],
     };
   },
   mounted() {
     this.getShopInfo();
+    this.getFoodsInfo();
   },
   computed: {
     ...mapGetters(["redpackInfo", "rstInfo"]),
+    ...mapState({ foods: (state) => state.detail.foodInfo }),
   },
   methods: {
     showPopup() {
       this.show = true;
     },
-
+    // 调用方法获取页面数据
     getShopInfo() {
       this.$store.dispatch("getShopInfo");
+    },
+    //点击购物车栏切换弹窗
+    collect() {
+      this.collectionTop.top =
+        this.collectionTop.top === "600px" ? "300px" : "600px";
+    },
+    //点击加号创建菜品获取增加菜品数量
+    async addFood({ food, foodId }) {
+      console.log(food.name, food.price, foodId);
+      //如果已经点过，那么只需要增加数量
+      if (this.foodNum[foodId]) {
+        console.log(2);
+        let num = ++this.foodNum[foodId];
+        await this.$store.dispatch("getUpdateFood", { foodId, num });
+        this.getFoodsInfo();
+        return;
+      }
+      //如果没有点过，那么需要创建一个餐品，因为点菜是在order页面，所以在主页是不会触发的
+      //因为是本地的模拟服务器，所以需要收集菜品的id，数量，名称，价格来创建数据
+      let { name, price } = food;
+      console.log(3);
+      let num = 1;
+      await this.$store.dispatch("getAddFood", { foodId, num, name, price });
+      this.getFoodsInfo();
+    },
+    //点击减号减少菜品数量获取删除菜品
+    async depFood(foodId) {
+      //如果没有点过，就不存在减少
+      console.log(foodId);
+      if (!this.foodNum[foodId]) return;
+      //如果在数量为1的时候点击减少，就意味着要删除这个菜品
+      if (this.foodNum[foodId] === 1) {
+        console.log("删除");
+        await this.$store.dispatch("delFood", { foodId });
+        this.getFoodsInfo();
+        return;
+      }
+      //如果数量大于1，就减少菜品的数量
+      console.log("减少");
+      let num = --this.foodNum[foodId];
+      await this.$store.dispatch("getUpdateFood", { foodId, num });
+      this.getFoodsInfo();
+    },
+    //获取点餐信息
+    async getFoodsInfo() {
+      //发送请求获取点餐内容
+      await this.$store.dispatch("getFoodsInfo");
+      // 判断本地的计算属性，如果存在就更新点餐数据
+      if (this.foods) {
+        this.foods.forEach((item) => {
+          //  响应式处理
+          this.$set(this.foodNum, item.id, item.num);
+        });
+      }
     },
   },
   components: {
