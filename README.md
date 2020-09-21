@@ -2,7 +2,7 @@
 
 public :
 
-  css 用于放置 重置样式和iconfont样式
+  css 1用于放置 重置样式和iconfont样式
   images 用于放置 公共图片
 
 src :
