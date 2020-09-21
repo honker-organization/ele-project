@@ -1,4 +1,5 @@
 import axios from 'axios'
+
 import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
 
@@ -26,3 +27,4 @@ service.interceptors.response.use(
 );
 
 export default service
+
