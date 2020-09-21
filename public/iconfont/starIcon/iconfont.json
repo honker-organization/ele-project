@@ -1,0 +1,30 @@
+{
+  "id": "2080698",
+  "name": "饿了么",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "3262879",
+      "name": "星",
+      "font_class": "xing1",
+      "unicode": "e626",
+      "unicode_decimal": 58918
+    },
+    {
+      "icon_id": "480630",
+      "name": "星",
+      "font_class": "xing",
+      "unicode": "e698",
+      "unicode_decimal": 59032
+    },
+    {
+      "icon_id": "15342948",
+      "name": "半星",
+      "font_class": "banxing",
+      "unicode": "e614",
+      "unicode_decimal": 58900
+    }
+  ]
+}
