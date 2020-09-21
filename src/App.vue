@@ -1,7 +1,6 @@
 <template>
-  <div id="app">
-    <!-- <Delicious /> -->
-    <Detail />
+  <div>
+    <router-view></router-view>
   </div>
 </template>
 

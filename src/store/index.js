@@ -1,12 +1,27 @@
-import Vuex from 'vuex'
 import Vue from 'vue'
+import Vuex from 'vuex'
+import personal from './personal.js'
+import login from '@/store/login'
+import detail from './detail'
+
 Vue.use(Vuex)
 
-import detail from './detail'
-const store = new Vuex.Store({
-    modules: {
-        detail
-    }
-})
+const state = {}
 
-export default store
+const mutations = {}
+
+const actions = {}
+
+const getters = {}
+
+export default new Vuex.Store({
+  state,
+  mutations,
+  actions,
+  getters,
+  modules:{
+    personal,
+    login,
+    detail
+  }
+})
