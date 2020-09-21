@@ -1,6 +1,7 @@
 <template>
   <div id="app">
-   <IconDetail></IconDetail> 
+    <SuperMarket></SuperMarket>
+   <!-- <IconDetail></IconDetail>  -->
   <!-- <selectionSort></selectionSort> -->
   <!--<SelectShippingAddress></SelectShippingAddress>-->
   <!--<Order></Order> -->
@@ -10,6 +11,7 @@
 </template>
 
 <script>
+import SuperMarket from '@/pages/supermarket'
 import IconDetail from '@/pages/iconDetail'
 import selectionSort from '@/components/selectionSort'
 import SelectShippingAddress from '@/pages/selectShippingAddress'
@@ -24,7 +26,8 @@ export default {
    SelectShippingAddress,
    Order,
    Search,
-   buyCart
+   buyCart,
+   SuperMarket
   }
 }
 </script>
