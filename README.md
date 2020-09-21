@@ -7,7 +7,7 @@
 
 ### public :
 ```
-  css 用于放置 重置样式和iconfont样式
+  22css 用于放置 重置样式和iconfont样式
   images 用于放置 公共图片
 ```
 ### src :
