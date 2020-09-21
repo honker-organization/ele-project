@@ -7,7 +7,7 @@
       />
     </div>
     <div class="recommend">
-      <p class="title">{{recommendInfo[0].name}}</p>
+      <p class="title" ref="title" @scroll="titleScroll($event)">{{recommendInfo[0].name}}</p>
       <van-swipe
         class="my-swipe"
         :autoplay="3000"
@@ -23,7 +23,7 @@
             />
             <div class="dishes">
               <div class="cartTitle">{{item.name}}</div>
-              <p class="foodCart">{{`月售9 好评率${item.satisfy_rate_text}%`}} </p>
+              <p class="foodCart">{{`月售9 好评率${item.satisfy_rate_text}%`}}</p>
               <div class="cartBottom">
                 <p class="price">￥{{item.price}}</p>
                 <van-icon name="add" />
@@ -36,13 +36,13 @@
     <div class="orderPage">
       <div class="navigation" id="resetNav">
         <ul>
-          <li class="asideItem" title="" v-for="(item, index) in menuInfo" :key="item.id">{{item.name}}</li>
+          <li class="asideItem" title v-for="(item, index) in menuInfo" :key="item.id">{{item.name}}</li>
         </ul>
       </div>
       <div class="menu">
-        <div  v-for="(item, index) in menuInfo" :key="item.id">
-          <div>
-            <span class="name">{{item.name_desc}}</span>
+        <div v-for="(item, index) in menuInfo" :key="item.id">
+          <div class="munu-desc">
+            <span class="name-desc">{{item.name_desc}}</span>
             <span class="desc">{{item.description}}</span>
           </div>
           <div class="menuItem" v-for="(food, index) in item.foods" :key="index">
@@ -72,9 +72,8 @@
                 <van-icon name="add" />
               </div>
             </div>
+          </div>
         </div>
-        </div>
-        
       </div>
     </div>
   </div>
@@ -85,7 +84,7 @@ import "./index.styl";
 import { Swipe, SwipeItem } from "vant";
 import { Icon } from "vant";
 import { Sidebar, SidebarItem } from "vant";
-import { mapGetters } from 'vuex';
+import { mapGetters } from "vuex";
 export default {
   name: "Order",
   data() {
@@ -93,12 +92,15 @@ export default {
       activeKey: 0,
     };
   },
-  computed:{
-    ...mapGetters(['menuInfo','recommendInfo'])
+  computed: {
+    ...mapGetters(["menuInfo", "recommendInfo"]),
   },
-  methods: {},
-  components: {
+  methods: {
+    titleScroll(event) {
+      console.log(event);
+    },
   },
+  components: {},
 };
 </script>
 
