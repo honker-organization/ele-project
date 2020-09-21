@@ -61,12 +61,22 @@
 
 <script>
 import { Icon, Card ,Tag } from 'vant';
+import reqShopList from '@/api/index'
 export default {
   name: '',
   components:{
     [Icon.name]:Icon,
     [Card.name]: Card,
     [Tag.name]: Tag,
+  },
+  mounted(){
+    this.getShopList()
+  },
+  methods:{
+    async getShopList(){
+      const res = await reqShopList()
+      console.log(res)
+    }
   }
 }
 </script>
