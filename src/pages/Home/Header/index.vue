@@ -66,6 +66,7 @@ export default {
       // 发送请求，携带改变完成的经纬度
       const position = await this.$api.cxh.reqPosition(latitude, longitude)
       this.position = position
+      console.log(this.position)
     },
     async getFoodList() {
       const res = await this.$api.cxh.reqFoodCategory()
