@@ -58,7 +58,7 @@
             @addFood="addFood"
             @depFood="depFood"
             :foods="foods"
-            :foodNum="foods"
+            :foodNum="foodNum"
             ref="order"
           />
         </van-tab>
@@ -83,7 +83,7 @@
           <div class="shopping-list">
             <div class="shopping-list-title">
               <span class="left">已选商品</span>
-              <!-- <span class="right" @touchstart="clearFood">清空</span> -->
+              <span class="right" @touchstart="clearFood">清空</span>
             </div>
             <div class="shopping-list-group">
               <div
@@ -143,6 +143,7 @@ import Order from "./Order";
 import Evaluate from "./Evaluate";
 import Business from "./Business";
 import { mapGetters, mapState } from "vuex";
+import { resolve } from 'path';
 export default {
   name: "Delicious",
   data() {
@@ -203,6 +204,8 @@ export default {
       if (this.foodNum[foodId] === 1) {
         console.log("删除");
         await this.$store.dispatch("delFood", { foodId });
+        //这里还需要将被删除的数据清掉
+        this.foodNum.splice(foodId,1)
         this.getFoodsInfo();
         return;
       }
@@ -214,16 +217,33 @@ export default {
     },
     //获取点餐信息
     async getFoodsInfo() {
+      console.log('重新获取了数量');
+      
       //发送请求获取点餐内容
       await this.$store.dispatch("getFoodsInfo");
       // 判断本地的计算属性，如果存在就更新点餐数据
+      console.log(this.foods);
+      
       if (this.foods) {
         this.foods.forEach((item) => {
           //  响应式处理
+          //这里设置的数据没有实时的删除
           this.$set(this.foodNum, item.id, item.num);
         });
       }
     },
+    clearFood(){
+      if(!this.foods)return
+      const promises = []
+      this.foods.forEach(item=>{
+        promises.push(this.$store.dispatch('delFood',{foodId:item.id}))
+      })
+      Promise.all(promises).then(resolveed=>{
+        this.getFoodsInfo()
+        this.collect()
+      })
+
+    }
   },
   components: {
     Order,
