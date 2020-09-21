@@ -89,11 +89,7 @@ export default {
 }
 
 .banner {
-<<<<<<< HEAD
 	padding-top :40px;
-=======
-	margin-top :40px;
->>>>>>> master
 	background: linear-gradient(rgb(0, 158, 255), rgb(225, 234, 250));
 	.bannerImg {
 		img {

@@ -1,8 +1,5 @@
 import axios from 'axios'
-<<<<<<< HEAD
 import { config } from 'vue/types/umd'
-=======
->>>>>>> master
 
 // 创建一个新的axios实例
 const request = axios.create({
