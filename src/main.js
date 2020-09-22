@@ -3,7 +3,7 @@ import App from './App.vue'
 import router from '@/router'
 import store from '@/store'
 import api from '@/api'
-import { Icon, DropdownMenu, Skeleton, DropdownItem, Search, IndexBar, IndexAnchor, Cell, Button, Field, Form } from 'vant'
+import { Loading, Icon, DropdownMenu, Skeleton, DropdownItem, Search, IndexBar, IndexAnchor, Cell, Button, Field, Form } from 'vant'
 import './config/flexible'
 // 引入mock，让mock.js生效
 import '@/mock/mock'
@@ -19,6 +19,7 @@ Vue
   .use(Field)
   .use(Form)
   .use(Skeleton)
+  .use(Loading)
 Vue.prototype.$api = api
 Vue.config.productionTip = false
 

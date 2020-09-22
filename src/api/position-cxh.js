@@ -21,5 +21,12 @@ export default {
       method: 'GET',
       url: '/getShopList'
     })
+  },
+  //获取城市列表
+  reqCityList () {
+    return mockAxios({
+      method: 'GET',
+      url: '/getCityList'
+    })
   }
 }

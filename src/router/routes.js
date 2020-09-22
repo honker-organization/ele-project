@@ -20,6 +20,11 @@ export default [
     component: () => import(/* webpackChunkName: "changeAddress" */ '@/pages/Home/Header/AddNewAddress')
   },
   {
+    path: '/hotSearch',
+    name: 'hotSearch',
+    component: () => import(/* webpackChunkName: "changeAddress" */ '@/pages/Home/Header/HotSearch')
+  },
+  {
     path: '/',
     redirect: '/home'
   }

@@ -1,19 +1,15 @@
 <template>
   <div>
-    <van-index-bar>
-      <van-index-anchor index="A" />
-      <van-cell title="阿坝县" />
-      <van-cell title="阿巴嘎旗" />
-      <van-cell title="阿坝藏族羌族自治区" />
+    <!-- <van-index-bar v-for="(key, value) in cityList.data" :key="key">
+      <van-index-anchor :index="key" />
+      <van-cell v-for="item in value" :title="item.name" :key="item.id" />
+    </van-index-bar>-->
 
-      <van-index-anchor index="B" />
-      <van-cell title="白山市" />
-      <van-cell title="白水县" />
-      <van-cell title="白银市" />
-      <van-index-anchor index="C" />
-      <van-cell title="长沙市" />
-      <van-cell title="长治县" />
-      <van-cell title="常州市" />
+    <van-index-bar :index-list="cityName">
+      <div v-for="(name, index) in cityName" :key="index">
+        <van-index-anchor :index="name">{{name}}</van-index-anchor>
+        <van-cell :title="item.name" v-for="item in cityList[name]" :key="item.id" />
+      </div>
     </van-index-bar>
   </div>
 </template>
@@ -21,6 +17,23 @@
 <script>
 export default {
   name: '',
+  data() {
+    return {
+      cityList: {}, //城市列表
+      cityName: [],
+    }
+  },
+  mounted() {
+    this.getCityList()
+  },
+  methods: {
+    async getCityList() {
+      const cityList = await this.$api.cxh.reqCityList()
+      this.cityList = cityList.data
+      this.cityName = Object.keys(cityList.data)
+      // console.log(this.cityList)
+    },
+  },
 }
 </script>
 
