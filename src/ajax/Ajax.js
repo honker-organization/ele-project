@@ -20,7 +20,7 @@ request.interceptors.request.use(config => {
 request.interceptors.response.use(response =>{
   NProgress.done()
  //返回响应的时候，直接返回响应的data
- return response.data
+ return response
 },error =>{
   NProgress.done()
    alert('请求出错' + error.message || '未知错误')

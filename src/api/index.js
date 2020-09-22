@@ -20,12 +20,15 @@ const baseUrl = 'https://elm.cangdu.org'
 export const reqShopList = () => request.get(`${baseUrl}/shopping/restaurants`)
 
 // 可用红包   get   /promotion/v2/users/:user_id/hongbaos?limit=20&offset=0
-export const reqAvailableHongBaoList = ({limit,offset,user_id}) => Ajax.get(`/promotion/v2/users/${user_id}/hongbaos?${limit}&${offset}`)
+// export const reqAvailableHongBaoList = (user_id) => Ajax.get(`/promotion/v2/users/${user_id}/hongbaos`)
 
 
 //过期红包 get /promotion/v2/users/:user_id/expired_hongbaos?limit=20&offset=0
-export const reqExpiredHongBaoList = (limit,offset,user_id) => Ajax.get(`/promotion/v2/users/${user_id}/expired_hongbaos?${limit}&${offset}`)
+// export const reqExpiredHongBaoList = (limit,offset,user_id) => Ajax.get(`/promotion/v2/users/${user_id}/expired_hongbaos?${limit}&${offset}`)
 
 // 兑换红包 post /v1/users/:user_id/hongbao/exchange
 
-export const reqExchangeHongBaoList = (user_id) => Ajax.post(`/v1/users/${user_id}/hongbao/exchange`)
+// export const reqExchangeHongBaoList = (user_id) => Ajax.post(`/v1/users/${user_id}/hongbao/exchange`)
+
+export const reqConfirmOrderInfo = () => Ajax.get('http://localhost:3000/confirmorder')
+//

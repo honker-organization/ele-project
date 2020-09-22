@@ -9,7 +9,12 @@ import shopDetails from '@/pages/shopDetails'
 import shopPages from '@/pages/shopPages'
 import supermarket from '@/pages/supermarket'
 import HongBao from '@/pages/HongBao'
+import confirm from '@/pages/confirm'
 export default [
+  {
+    path:"/confirm",
+    component:confirm
+  },
   {
     path:"/personal",
     component:Personal

@@ -10,10 +10,10 @@ const mutations = {
 }
 
 const actions = {
-  async getAvailableHongBaoList({commit},{limit,offset,user_id}){
+  async getAvailableHongBaoList({commit},user_id){
     console.log(222)
-    console.log({limit,offset,user_id})
-    const result = await reqAvailableHongBaoList({limit,offset,user_id})
+    console.log(user_id)
+    const result = await reqAvailableHongBaoList(user_id)
     console.log(result)
     if(result.code === 200){
       console.log(result.data)

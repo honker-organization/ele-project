@@ -55,7 +55,7 @@ export default {
     },
      getAvailableHongBaoList(){
        console.log(111)
-      this.$store.dispatch('getAvailableHongBaoList',{limit:this.limit,offset:this.offset,user_id:this.user_id})
+      this.$store.dispatch('getAvailableHongBaoList',this.user_id)
     }
   }
 }
