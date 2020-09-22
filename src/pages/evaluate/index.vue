@@ -21,7 +21,7 @@
             </div>
 
             <div class="commitStatus">
-              <Star :rating="commitItem.rating_star"></Star>
+             <!-- <Star :rating="commitItem.rating_star"></Star> -->
               <div class="word">{{commitItem.rating_text}}</div>
             </div>
             

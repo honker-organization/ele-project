@@ -7,8 +7,8 @@
     <div class="content-area">
       <van-form @submit="onSubmit"  ref="Form">
         <van-field
-          v-model="phoneNumber"
-          name="phoneNumber"
+          v-model="username"
+          name="username"
           label="手机号"
           :rules="[{ required: true, message: '请填写手机号' },{pattern,message: '请填写正确的手机号'}]"
         />
@@ -38,7 +38,7 @@
             :disabled="isShow?false:true">{{isShow?'获取验证码':time+'秒后重发'}}</van-button>
           </template>
         </van-field>
-
+         <img :src="verificationCode" alt="">
         <div class="MessageLogin-15xD9">
           新用户登录即自动注册，并表示已同意
           <a href="#">《用户服务协议》</a>
@@ -60,15 +60,16 @@
 
 <script>
 // import {reqGetVerificationCode} from '@/api'
+import {mapState} from 'vuex'
 export default {
   name: 'Login',
   data() {
     return {
-      phoneNumber: '',
+      username: '',
       captcha_code:'',
       password: '',
       pattern:/^1[3-9]\d{9}$/,
-      time:6,
+      time:5,
       isShow:true,
     };
   },
@@ -98,19 +99,20 @@ export default {
     //   })
     // },
     //登录
-    async login(){
-      let {phoneNumber,password,captcha_code} = this
-      if(phoneNumber==='13767883909'  &&  password==='111111' &&  captcha_code==='123456'){
+     login(){
+        // let {username,password,captcha_code} = this
         // console.log('123')
-        let userInfo = {phoneNumber,password,captcha_code}
-        this.$bus.$emit('showUserInfo',userInfo)
-        await this.$store.dispatch('userLogin',userInfo)
+        // let userInfo = {username,password,captcha_code}
+        // console.log(userInfo);
+        // await this.$store.dispatch('userLogin',userInfo)
+        localStorage.setItem('USERNAME_KEY',JSON.stringify(this.username))
         this.$router.push('/personal')
-      }else{
-        // console.log('321')
-        alert('手机号13767883909 密码111111 验证码123456')
-      }
     }
+  },
+  computed: {
+    ...mapState({
+      verificationCode:state => state.login.verificationCode
+    })
   },
 }
 </script>

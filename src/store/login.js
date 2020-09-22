@@ -16,7 +16,8 @@ const mutations = {
 const actions = {
   async userLogin({commit},userInfo){    
     const result = await reqLogin(userInfo)
-    if(result.status === 0){
+    if(result.status === 1){
+      // console.log(result)
       commit('RECEIVEUSERINFO',result.data)
     }
   },

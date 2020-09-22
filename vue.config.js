@@ -26,7 +26,7 @@ module.exports = {
   devServer:{
     proxy: {
       "/api": {
-        target: "https://elm.cangdu.org", //获取验证码的协议域名
+        target: "https://elm.cangdu.org", 
         pathRewrite: {"^/api" : ""},
         changeOrigin:true
       }
