@@ -6,7 +6,7 @@
     <!-- <router-view></router-view> -->
     <!--<Myaddress></Myaddress> -->
 
-    <!-- <Footer></Footer> -->
+    <Footer></Footer>
 
     <!--<Evaluate></Evaluate> -->
   </div>
@@ -15,8 +15,12 @@
 <script>
 // import Delicious from '@/pages/Delicious'
 // import Detail from '@/pages/Detail'
+import Footer from '@/components/footer'
 export default {
   name: 'App',
+  components: {
+    Footer,
+  },
   // components: { Delicious, Detail },
 }
 </script>

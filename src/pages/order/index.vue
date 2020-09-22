@@ -16,95 +16,93 @@
 
           <div class="cardMessage">
             <div class="radio">
-              <input class="rad" type="radio"  :checked="shopItem.checked" @click="checkedOne(index)" />
+              <input
+                class="rad"
+                type="radio"
+                :checked="shopItem.checked"
+                @click="checkedOne(index)"
+              />
             </div>
             <div class="goods">{{shopItem.support_tags[0].text}}等三件商品</div>
             <div class="cardPrice">￥{{shopItem.piecewise_agent_fee.rules[0].price}}</div>
-
           </div>
 
           <!-- <button class="btn">再来一单</button> -->
-          <van-stepper  theme="round" button-size="22" v-model='shopItem.value' disable-input @change="onChange($event,shopItem.id)"/> 
-         <!--<div class="num">
+          <van-stepper
+            theme="round"
+            button-size="22"
+            v-model="shopItem.value"
+            disable-input
+            @change="onChange($event,shopItem.id)"
+          />
+          <!--<div class="num">
             <p class="btn-update"> - </p>
             <p>1</p>
             <p class="btn-update"> + </p>
          </div>
-         -->
+          -->
         </div>
       </div>
     </div>
 
-    <div class="bottom" >
+    <div class="bottom">
       <van-checkbox v-model="allChecked"></van-checkbox>
       <span class="checked">已选{{count}}件</span>
       <span class="line">/</span>
       <span class="all">总共{{shopList.length}}件</span>
-      <span class="price">总价￥{{allPrice}}元</span> 
+      <span class="price">总价￥{{allPrice}}元</span>
       <button class="pay">去结算</button>
     </div>
   </div>
 </template>
 
 <script>
-import OrderCard from "@/components/orderCard";
-import cxh from "@/api";
-import setImagePath from "@/utils/imagePath";
+import { mapState } from 'vuex'
+import OrderCard from '@/components/orderCard'
+import cxh from '@/api'
+import setImagePath from '@/utils/imagePath'
 export default {
-  name: "",
+  name: '',
   data() {
     return {
-      shopList: [],
       checkShop: [],
-      value:1,
-      currentIndex:-1,
-      num:1
-    };
-  },
-  async mounted() {
-    // console.log(cxh)
-    const result = await cxh.cxh.reqShopList();
-    // console.log(result)
-    this.shopList = setImagePath(result.data.items);
-   
+      value: 1,
+      currentIndex: -1,
+      num: 1,
+    }
   },
   components: {
-    OrderCard
+    OrderCard,
   },
   methods: {
     // 单选
     checkedOne(index) {
-      this.$set(this.shopList[index],'checked',!this.shopList[index].checked)
+      this.$set(this.shopList[index], 'checked', !this.shopList[index].checked)
       //  this.shopList[index].checked = !this.shopList[index].checked;
-
     },
 
     // 商品数量的增减
-    onChange(options,id){
+    onChange(options, id) {
+      this.shopList.forEach((item) => {
+        if (item.id === id) {
+          item.value = options
 
-      this.shopList.forEach(item => {
-
-        if(item.id === id){
-
-            item.value = options
-
-            console.log(item.value)
-
-            
+          console.log(item.value)
         }
       })
-
-    
-    }
+    },
   },
 
   computed: {
+    ...mapState({
+      shopList: (state) => state.cxh.shopList,
+    }),
     // 统计已选商品数量
     count() {
       // console.log(this.shopList.filter(item => item.checked).length);
       // return this.shopList.filter(item => item.checked).length;
 
-      let result = this.shopList.filter(item => item.checked)
+      let result = this.shopList.filter((item) => item.checked)
       console.log(result.length)
 
       this.checkShop = result
@@ -114,23 +112,23 @@ export default {
     //  计算总价
     allPrice() {
       return this.checkShop.reduce((pre, item) => {
-        return (pre += item.piecewise_agent_fee.rules[0].price * item.value);
-      }, 0);
+        return (pre += item.piecewise_agent_fee.rules[0].price * item.value)
+      }, 0)
     },
 
     // //全选功能
     allChecked: {
       get() {
-        return this.shopList.every(item => item.checked);
+        return this.shopList.every((item) => item.checked)
       },
 
       set(checked) {
-        console.log(checked);
-        this.shopList.forEach(item => (item.checked = checked));
-      }
-    }
-  }
-};
+        console.log(checked)
+        this.shopList.forEach((item) => (item.checked = checked))
+      },
+    },
+  },
+}
 </script>
 
 <style lang="less" scoped>
@@ -138,25 +136,22 @@ export default {
   margin-bottom: 60px;
   position: relative;
 
-   /deep/ .van-stepper--round .van-stepper__minus {
-
+  /deep/ .van-stepper--round .van-stepper__minus {
     color: #039bf3;
     border: 2px solid #2395ff;
-   }
-
-   /deep/ .van-stepper--round .van-stepper__plus{
-         background-color:  #2395ff;
-   }
-
-
-  /deep/ .van-stepper{
-    position: absolute;
-    top:110px;
-    right: 20px;
-  
   }
 
-  .num{
+  /deep/ .van-stepper--round .van-stepper__plus {
+    background-color: #2395ff;
+  }
+
+  /deep/ .van-stepper {
+    position: absolute;
+    top: 110px;
+    right: 20px;
+  }
+
+  .num {
     width: 175px;
     height: 39px;
     font-size: 39px;
@@ -166,15 +161,15 @@ export default {
     right: -85px;
   }
 
-  .btn-update{
-    width:20px;
-    height:20px;
+  .btn-update {
+    width: 20px;
+    height: 20px;
     line-height: 30px;
     text-align: center;
     font-size: 35px;
     background: #2395ff;
     border-radius: 50%;
-    color:white
+    color: white;
   }
 }
 .order-card {
@@ -258,10 +253,10 @@ export default {
   // background: #2395ff;
   width: 20px;
   border-radius: 50%;
-   .rad{
-     position: absolute;
-     top:0.5px;
-     left: 3px;
+  .rad {
+    position: absolute;
+    top: 0.5px;
+    left: 3px;
     background: #2395ff;
     color: white;
   }
@@ -297,7 +292,7 @@ export default {
 
   .price {
     position: absolute;
-    color: #1989FA;
+    color: #1989fa;
     // color: white;
     font-weight: bold;
     font-size: 17px;
@@ -305,15 +300,15 @@ export default {
     left: 180px;
   }
 
-  .pay{
+  .pay {
     position: absolute;
     color: white;
-    background: #1989FA;
+    background: #1989fa;
     font-weight: bold;
     font-size: 17px;
     line-height: 16px;
-    right:0px;
-    top:0;
+    right: 0px;
+    top: 0;
     width: 90px;
     height: 50px;
     border: none;

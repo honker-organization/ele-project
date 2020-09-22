@@ -44,16 +44,16 @@ export default [
   {
     path: "/selectshippingaddress",
     component: selectShippingAddress,
-  
+
   },
-   {
-     path: "/addNewAddress",
-     component: AddNewAddress,
-   },
-   {
-     path: "/myAddress",
-     component: MyAddress,
-   },
+  {
+    path: "/addNewAddress",
+    component: AddNewAddress,
+  },
+  {
+    path: "/myAddress",
+    component: MyAddress,
+  },
   {
     path: "/shopdetails",
     component: shopDetails
@@ -66,9 +66,18 @@ export default [
     path: "/supermarket",
     component: supermarket
   },
- 
+
   {
     path: "",
-    redirect:'/home'
+    redirect: '/home'
   },
+  {
+    path: '/hotSearch',
+    name: 'hotSearch',
+    component: () => import(/* webpackChunkName: "changeAddress" */ '@/pages/Home/Header/HotSearch')
+  },
+  {
+    path: '/',
+    redirect: '/home'
+  }
 ]

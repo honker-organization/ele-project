@@ -3,7 +3,7 @@ import Vuex from "vuex";
 import personal from "./personal.js";
 import login from "@/store/login";
 import detail from "./detail";
-
+import cxh from './modules/cxh'
 import selectShippingAddress from "@/store/selectShippingAddress";
 import shop from "@/store/shop";
 Vue.use(Vuex);
@@ -15,5 +15,6 @@ export default new Vuex.Store({
     detail,
     selectShippingAddress,
     shop,
+    cxh
   },
 });

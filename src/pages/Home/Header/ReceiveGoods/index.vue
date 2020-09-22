@@ -6,7 +6,7 @@
     <div class="container">
       <van-icon name="arrow-left" size="30px" color="#fff" @click="$router.back()" />
       <div class="word">选择收货地址</div>
-      <div class="newAddress" @click="$router.push('/addNewAddress')">新增地址</div>
+      <div class="newAddress" @touchend="$router.push('/addNewAddress')">新增地址</div>
     </div>
     <Addr />
   </div>
@@ -31,12 +31,12 @@ export default {
   justify-content: space-around;
   align-items: center;
 
-  .word,
   .newAddress {
     color: #fff;
     font-weight: 200;
   }
   .word {
+    color: #fff;
     font-size: 18px;
   }
   .newAddress {

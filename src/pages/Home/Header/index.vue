@@ -2,21 +2,31 @@
 <template>
   <div class="wrapper">
     <!-- 头部 -->
-    <div class="headerContainer" >
+    <div class="headerContainer">
       <!-- #0093ff -->
-      <div @touchend="toselectShippingAddress" class="word" >
+      <div class="word" @touchend="$router.push('/changeAddress')">
         <van-icon size="20px" name="location" color="#fff" />
         <span class="text" v-if="!position.name">正在识别地址</span>
         <span class="text" v-else>{{position.name}}</span>
         <van-icon name="arrow-down" color="#fff" />
       </div>
-
-        <van-search class="search" placeholder="请输入搜索关键词" input-align="center" @touchend="$router.push('/')"/>
-      
+      <div class="searchToTop" :class="{toTop:isFixed}">
+        <van-search
+          class="search"
+          placeholder="请输入关键词"
+          input-align="center"
+          @click="$router.push('/hotSearch')"
+        />
+      </div>
     </div>
     <!-- 导航栏 -->
     <div class="navContainer">
-      <div class="navItem" v-for="item in foodList" :key="item.id" @touchend="$router.push('/icondetail')">
+      <div
+        class="navItem"
+        v-for="item in foodList"
+        :key="item.id"
+        @touchend="$router.replace('/icondetail')"
+      >
         <van-skeleton
           :loading="foodLoading"
           title-width="45px"
@@ -42,10 +52,8 @@ export default {
       position: {}, // 位置相关信息
       foodList: [], // 食品分类
       foodLoading: true,
+      isFixed: false,
     }
-  },
-  beforeDestroy() {
-    clearTimeout(this.timeId)
   },
   mounted() {
     // 发送请求，请求当前位置详情
@@ -53,11 +61,16 @@ export default {
     // 发送请求，请求食品分类数据
     this.getFoodList()
   },
+
   methods: {
     getPosition() {
       // 通过一系列操作改变data中的经纬度
+      // console.log(navigator.geolocation)
       if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(this.showPosition)
+        console.log(navigator.geolocation.getCurrentPosition)
+        navigator.geolocation.getCurrentPosition(this.showPosition, (err) => {
+          console.log(err)
+        })
       }
     },
     // 获取当前坐标
@@ -65,11 +78,13 @@ export default {
       const {
         coords: { latitude, longitude },
       } = detail
+      console.log(detail)
       // 发送请求，携带改变完成的经纬度
       const position = await this.$api.cxh.reqPosition(latitude, longitude)
       this.position = position
       console.log(this.position)
     },
+
     async getFoodList() {
       const res = await this.$api.cxh.reqFoodCategory()
       const foodList = res.data.items
@@ -79,29 +94,53 @@ export default {
       }, 1000)
     },
 
-    toselectShippingAddress(){
+    toselectShippingAddress() {
       console.log(111)
       this.$router.push('/selectshippingaddress')
-    }
+    },
   },
 }
 </script>
 
 <style scoped lang="less">
+.searchToTop {
+  height: 60px;
+  display: flex;
+  align-items: center;
+}
+.toTop {
+  // background: #0093ff;
+  // position: fixed;
+  // top: 0;
+  // left: 0;
+  // z-index: 100;
+}
+/deep/.van-search__content--square {
+  padding: 5px 110px;
+}
 /deep/.van-search {
-  padding: 0;
+  padding: 0px;
+  margin: 12px auto;
+  border-radius: 5px;
 }
 /deep/.van-skeleton__title {
   height: 45px;
 }
 
+// .toTop {
+//   width: 100%;
+//   position: fixed;
+//   z-index: 1000;
+// }
+
 .wrapper {
   // 头部样式
   .headerContainer {
     position: sticky;
-    top:0;
+    top: 0;
     z-index: 99;
     height: 90px;
+    height: 100px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -110,7 +149,7 @@ export default {
     .word {
       font-size: 12px;
       width: 90%;
-      margin-bottom: 10px;
+      margin: 10px 0;
     }
 
     .text {

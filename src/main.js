@@ -1,8 +1,14 @@
 import Vue from "vue";
 import App from "./App.vue";
+//这是一个瀑布流滚动插件
+import VirtualCollection from "vue-virtual-collection";
+import "element-ui/lib/theme-chalk/index.css";
 import router from "@/router";
 import store from "@/store";
 import api from "@/api";
+// import './config/flexible'
+import "@/mock/mock";
+import "@/mock/mock-detail";
 import {
   Sidebar,
   SidebarItem,
@@ -33,11 +39,11 @@ import {
   Tag,
   Loading,
   PullRefresh,
+  List
 } from "vant";
 import "./config/rem";
 
-// 引入mock，让mock.js生效
-import "@/mock/mock";
+
 Vue.use(Icon)
   .use(DropdownItem)
   .use(DropdownMenu)
@@ -67,29 +73,14 @@ Vue.use(Icon)
   .use(Sticky)
   .use(Checkbox)
   .use(Stepper)
-  .use(Tag);
-Vue.prototype.$api = api;
-
-import "element-ui/lib/theme-chalk/index.css";
-
-Vue.prototype.$api = api;
-
-Vue.config.productionTip = false;
-
-//这是一个瀑布流滚动插件
-import VirtualCollection from "vue-virtual-collection";
+  .use(Tag)
+  .use(List)
 Vue.use(VirtualCollection);
-
-import "@/mock/mock-detail";
-
-import { List } from "vant";
-
-Vue.use(List);
-
-Vue.prototype.$bus = this;
+Vue.prototype.$api = api
+Vue.config.productionTip = false
 
 new Vue({
-  beforeCreate() {
+  beforeCreate () {
     Vue.prototype.$bus = this;
   },
   render: (h) => h(App),

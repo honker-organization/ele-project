@@ -1,5 +1,5 @@
 <template>
-  <div class="recommendContainer">
+  <div class="recommendContainer" ref="recommendContainer">
     <div class="title">—— 推荐商家 ——</div>
     <!-- 排序 -->
     <div class="selectContainer">
@@ -14,7 +14,7 @@
 
     <div class="shopContainer" v-for="(shop,index) in sortShopList" :key="index">
       <van-skeleton :loading="loading" avatar-shape="square" animate title avatar :row="3">
-        <div class="shopItem" >
+        <div class="shopItem">
           <div class="photoContainer">
             <img :src="shop.image_path" />
             <div class="detail">
@@ -48,7 +48,7 @@
             <div class="tags">
               <div class="more-container">
                 <div class="more" v-for="(item,inx) in shop.activities" :key="inx">
-                  <div v-if="inx < 2 || isShowActivity">
+                  <div v-if="inx < 2 || (isShowActivity && currentId === shop.authentic_id)">
                     <span
                       class="jian"
                       :style="{backgroundColor:`#${item.icon_color}`}"
@@ -58,20 +58,34 @@
                 </div>
               </div>
               <div class="activityLength" v-if="shop.activities.length > 2">
-                <span @click="showActivity">{{shop.activities.length}}个活动</span>
-                <span @click="showActivity" class="trig" :class="{active:isShowActivity}"></span>
+                <span @touchend="showActivity(shop.authentic_id)">{{shop.activities.length}}个活动</span>
+                <span
+                  @touchend="showActivity(shop.authentic_id)"
+                  class="trig"
+                  :class="{active:isShowActivity && currentId === shop.authentic_id}"
+                ></span>
               </div>
             </div>
           </div>
         </div>
       </van-skeleton>
     </div>
+    <van-loading
+      v-if="isShowFooterLoading===0"
+      type="spinner"
+      color="pink"
+      size="24px"
+      vertical
+      class="loading"
+    >莫急莫慌...</van-loading>
+    <span v-else-if="isShowFooterLoading===1">没有更多数据了...</span>
+    <span v-else-if="isShowFooterLoading===2">加载失败...</span>
   </div>
 </template>
 <script>
+import { mapState } from 'vuex'
 import Sort from '@/components/sort'
 import Star from '@/components/star'
-import setImagePath from '@/utils/imagePath'
 export default {
   name: '',
   components: {
@@ -80,9 +94,10 @@ export default {
   },
   data() {
     return {
-      shopList: [], // 获取商铺列表
-      isShowActivity: false, // 默认不显示全部的活动
+      currentId: '',
       loading: true,
+      isShowActivity: false,
+      isShowFooterLoading: 3, // 0 => 加载中 1 => 没有更多数据 2 => 加载失败 3 => 关闭loading
       /**
        * 0 => 综合排序
        * 1 => 好评优先
@@ -98,6 +113,9 @@ export default {
   },
 
   computed: {
+    ...mapState({
+      shopList: (state) => state.cxh.shopList,
+    }),
     sortShopList() {
       const { value, shopList } = this
       // 根据value值进行排序
@@ -117,27 +135,29 @@ export default {
   },
   beforeDestroy() {
     clearTimeout(this.timeId)
+    window.removeEventListener('scroll', this.scrollFooter())
   },
   mounted() {
     // 发送请求，请求商铺列表
     this.getShopList()
+    this.scrollFooter()
   },
   methods: {
     // 获取商铺列表
     async getShopList() {
-      const res = await this.$api.cxh.reqShopList()
-      if (res.code === 200) {
-        const shopList = setImagePath(res.data.items)
-        this.shopList = shopList
+      try {
+        await this.$store.dispatch('getShopList')
         this.timeId = setTimeout(() => {
           this.loading = false
         }, 1000)
+      } catch (error) {
+        this.isShowFooterLoading = 2
       }
     },
-    showActivity() {
+    showActivity(id) {
+      this.currentId = id
       this.isShowActivity = !this.isShowActivity
     },
-    // 拿到当前选中到下拉框到value值
     getValue(value) {
       this.value = value
     },
@@ -148,7 +168,6 @@ export default {
       switch (type) {
         case 1:
           return newShopList.sort((a, b) => b.rating - a.rating)
-
         case 2:
           return newShopList.sort(
             (a, b) =>
@@ -169,15 +188,42 @@ export default {
           return newShopList
       }
     },
+    // 滚动到底部触发的函数
+    scrollFooter() {
+      return window.addEventListener('scroll', async (e) => {
+        // 元素高度
+        let scrollTop =
+          document.documentElement.scrollTop || document.body.scrollTop
+        let clientHeight =
+          document.documentElement.clientHeight || document.body.clientHeight
+        let scrollHeight =
+          document.documentElement.scrollHeight || document.body.scrollHeight
+        const isFooter =
+          scrollHeight > clientHeight &&
+          scrollTop + clientHeight === scrollHeight
+        // 如果触底
+        if (isFooter) {
+          this.isShowFooterLoading = 0
+          await this.getShopList()
+          this.isShowFooterLoading = 3
+        }
+      })
+    },
   },
 }
 </script>
 <style scoped lang="less">
-
 .star {
   font-size: 14px;
 }
-
+.loading {
+  position: fixed;
+  bottom: 70px;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  z-index: 999999;
+}
 .recommendContainer {
   /deep/.van-skeleton__avatar {
     width: 65px !important;
@@ -200,13 +246,13 @@ export default {
   }
   .selectContainer {
     position: sticky;
-    top:0px;
-    z-index:99;
+    top: 0px;
+    z-index: 99;
     display: flex;
     width: 100%;
     background: white;
     margin: 0 auto;
-  
+
     justify-content: space-between;
     .selectitem {
       display: flex;
