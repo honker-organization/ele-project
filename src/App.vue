@@ -1,8 +1,13 @@
 <template>
   <div>
-    <!-- <Detail /> -->
-    <Delicious />
-    <router-view></router-view>
+    <Detail />
+    <!-- <Delicious /> -->
+    <!-- <router-view></router-view> -->
+    <!--<Myaddress></Myaddress> -->
+
+    <!-- <Footer></Footer> -->
+
+    <!--<Evaluate></Evaluate> -->
   </div>
 </template>
 
@@ -16,3 +21,19 @@ export default {
 </script>
 
 <style></style>
+import Footer from './components/footer'
+import Myaddress from '@/pages/myAddress'
+import Evaluate from '@/pages/evaluate'
+export default {
+  name: '',
+  components:{
+   Footer,
+   Myaddress,
+   Evaluate
+    
+  }
+}
+</script>
+
+<style lang="less" scoped>
+</style>

@@ -1,21 +1,33 @@
-import {reqLogin} from '@/api'
+import {reqLogin,reqGetVerificationCode} from '@/api'
 const state = {
-  userInfo: {}
+  userInfo: {},
+  code:{}
 }
 
 const mutations = {
   RECEIVEUSERINFO(state,userInfo){
     state.userInfo = userInfo
   },
+  RECEIVECODE(state,code){
+    state.code = code
+  }
 }
 
 const actions = {
   async userLogin({commit},userInfo){    
     const result = await reqLogin(userInfo)
-    if(result.status === 0){
+    if(result.status === 1){
+      // console.log(result)
       commit('RECEIVEUSERINFO',result.data)
     }
   },
+
+  // 获取验证码
+  async getCode({commit}){
+    const result = await reqGetVerificationCode()
+
+    commit('RECEIVECODE',result)
+  }
 }
 
 const getters = {}

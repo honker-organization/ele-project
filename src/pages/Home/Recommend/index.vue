@@ -14,7 +14,7 @@
 
     <div class="shopContainer" v-for="(shop,index) in sortShopList" :key="index">
       <van-skeleton :loading="loading" avatar-shape="square" animate title avatar :row="3">
-        <div class="shopItem">
+        <div class="shopItem" >
           <div class="photoContainer">
             <img :src="shop.image_path" />
             <div class="detail">
@@ -173,6 +173,7 @@ export default {
 }
 </script>
 <style scoped lang="less">
+
 .star {
   font-size: 14px;
 }
@@ -198,9 +199,14 @@ export default {
     margin-top: 70/2px;
   }
   .selectContainer {
+    position: sticky;
+    top:0px;
+    z-index:99;
     display: flex;
-    width: 90%;
+    width: 100%;
+    background: white;
     margin: 0 auto;
+  
     justify-content: space-between;
     .selectitem {
       display: flex;

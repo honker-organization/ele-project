@@ -18,6 +18,8 @@ export default {
       let gray = 0
       let half = false
       const { rating } = this
+     
+      if(!rating) return
       // 判断整数
       const isInteger = Math.floor(rating) === rating
       // const isInteger = rating % 1 === 0

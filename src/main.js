@@ -25,6 +25,14 @@ import {
   Button,
   Field,
   Form,
+  Tabbar,
+  TabbarItem,
+  Sticky,
+  Checkbox,
+  Stepper,
+  Tag,
+  Loading,
+  PullRefresh,
 } from "vant";
 import "./config/rem";
 
@@ -51,7 +59,16 @@ Vue.use(Icon)
   .use(Swipe)
   .use(SwipeItem)
   .use(Sidebar)
-  .use(SidebarItem);
+  .use(SidebarItem)
+  .use(Tabbar)
+  .use(TabbarItem)
+  .use(Loading)
+  .use(PullRefresh)
+  .use(Sticky)
+  .use(Checkbox)
+  .use(Stepper)
+  .use(Tag);
+Vue.prototype.$api = api;
 
 import "element-ui/lib/theme-chalk/index.css";
 
@@ -68,6 +85,8 @@ import "@/mock/mock-detail";
 import { List } from "vant";
 
 Vue.use(List);
+
+Vue.prototype.$bus = this;
 
 new Vue({
   beforeCreate() {

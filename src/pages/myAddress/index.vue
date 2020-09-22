@@ -1,89 +1,49 @@
 <template>
-  <!--选择收货地址页-->
-  <div class="selectShippingAddress">
-  <!--头部-->
-    <van-nav-bar title="选择收货地址" right-text="新增地址"  left-arrow @click-left = "$router.push('/home')" @click-right = "$router.push('/addNewAddress')">
-     
-    </van-nav-bar>
-
-  <!--搜索-->
-    <div class="selectShippingAddress-search">
-      <div class="selectShippingAddress-search-address">
-           <span class="selectShippingAddress-search-AT">南昌</span>
-           <van-icon name="arrow-down" />
-      </div>
-     
-     <div class="selectShippingAddress-search-input">
-      <input type="text" placeholder="请输入地址" autocomplete="off" v-model="keyword" @input="toSearch"/>
-      <van-icon name="search" />
-     </div>
-
-        <div class="search" v-if="keyword">
-            <div  v-for="(newAddress, index) in newAddressList" :key="newAddress.id">
-                <div class="keyword">{{keyword}}
-                <div class="keywordChild">{{newAddress.address}}</div>
-            </div>
-        </div>     
-      </div>
-    </div>
-
+  <div class="myAddress">
+    <header class="myAddress_header">
+      <!--<div class="myAddress_headerContainer">
+        <div class="myAddress_headerImage">
+          
+        </div> 
+            <h1 class="myAddress_headerTitle">我的地址</h1> 
+      </div> -->
+       <!--头部-->
+      <van-nav-bar title="我的地址"   left-arrow @click-left = "$router.push('/home')" @click-right = "$router.push('/addNewAddress')">
+      
+      </van-nav-bar>
+    </header>
     
-
-    <!-- 当前地址 -->
-    <div class="currentAddress">
-        <div class="selectShippingCurrentAddress-title">
-            当前地址
-        </div>
-
-        <div class="selectShippingCurrentAddress-content">
-            <div class="selectShippingCurrentAddress-address">深圳市宝安区</div>
-            <div class="selectShippingCurrentAddress-icon">
-                <van-icon name="aim" /> 
-                <span>重新定位</span>
-            </div>
-        </div>
-    </div>
-
-     <!-- 收货地址 -->
+     <!-- 我的地址 -->
     <div class="shippingAddress">
         <div class="shippingAddress-title">
             收货地址
         </div>
 
-        <div class="shippingAddress-content" v-for="(selectShippingAddress, index) in selectShippingAddressList" :key="selectShippingAddress.id">
+        <div class="shippingAddress-content" v-for="(myAddress, index) in selectShippingAddressList" :key="myAddress.id">
             <div class="shippingAddress-messsage">
                 <div class="shippingAddress-name">
-                    {{selectShippingAddress.name}}
+                   {{myAddress.name}}
                 </div>
-                <div class="shippingAddress-call">{{selectShippingAddress.sex === 2 ? '女士' : '先生'}}</div>
-                <div class="shippingAddress-phone">{{selectShippingAddress.phone}}</div>
+                <div class="shippingAddress-call">{{myAddress.sex === 2 ? '女士' : '先生'}}</div>
+                <div class="shippingAddress-phone">{{myAddress.phone}}</div>
             </div>
 
-            <div class="address">{{selectShippingAddress.address}}</div>
+            <div class="address">{{myAddress.address}}</div>
+            <van-icon name="records" @touchend="toUpdateAddress(myAddress)"/>
+            <van-icon name="delete" @touchend="deleteMyaddress(myAddress.id)"/>
         </div>
 
         
     </div>
 
-    
   </div>
 </template>
 
 <script>
-import { NavBar,Icon } from 'vant';
-import { mapState } from 'vuex';
+import { mapState } from 'vuex'
+import {reqDeleteMyaddress} from '@/api'
 export default {
-  name: 'SelectShippingAddress',
-  data(){
-    return{
-      keyword:"",
-      newAddressList:[]
-    }
-  },
-  components:{
-    [NavBar.name]:NavBar,
-    [Icon.name]:Icon
-  },
+  name: '',
   mounted(){
 
     this.getSelectShippingAddressList()
@@ -93,29 +53,34 @@ export default {
     getSelectShippingAddressList(){
       this.$store.dispatch('getSelectShippingAddressList')
     },
-   
-  // 根据关键字显示地址
-  toSearch(){
-     const addList = this.selectShippingAddressList
-    //  console.log(addList)
-     let newAddressList = addList.filter(item =>item.address.indexOf(this.keyword) > -1)
 
-      this.newAddressList = newAddressList
-     
-  }
+    // 删除我的地址
+    async deleteMyaddress(id){
+      // console.log(event)
+       await this.$store.dispatch('deleteMyaddress',id)
+
+      this.getSelectShippingAddressList()
+
+      // console.log(id)
+      // let result = await reqDeleteMyaddress(id)
+      // console.log(result)
+    },
+
+    // 更新我的地址
+   toUpdateAddress(myAddress){
+     let address = JSON.stringify(myAddress)
+      this.$router.push('/addNewAddress?myAddress=' + address)
+   }
 
   },
   computed:{
     ...mapState({selectShippingAddressList:state => state.selectShippingAddress.selectShippingAddressList}),
-   
   }
-
 }
 </script>
 
 <style lang="less" scoped>
- 
-  /deep/ .van-nav-bar{
+ /deep/ .van-nav-bar{
     background-color: #2395FF;
     border-bottom: 1px solid #000;
   }
@@ -127,7 +92,7 @@ export default {
 
   /deep/ .van-nav-bar__title{
     color:white;
-    font-size: 16px;
+    font-size: 18px;
   }
 
   /deep/ .van-nav-bar__text{
@@ -135,8 +100,7 @@ export default {
     font-size: 14px;
   }
 
-
-  .selectShippingAddress-search{
+.selectShippingAddress-search{
     height: 50px;
   
     display: flex;
@@ -181,7 +145,7 @@ export default {
       width: 100%;
       height: 40px;
       background: white;
-      font-size: 15px;
+      font-size: 16px;
       font-weight: bold;
       padding-left: 20px;
       padding-top: 10px;
@@ -257,6 +221,7 @@ export default {
   .shippingAddress-content{
     height: 50px;
     border-bottom: 1px #F2F2F2 solid;
+    position: relative;
   }
 
   .shippingAddress-messsage{
@@ -270,7 +235,7 @@ export default {
 
   .shippingAddress-name{
     font-size:13px;
-    color: block;
+    color: black;
     font-weight:bold;
     margin-right: 10px;
   }
@@ -290,5 +255,19 @@ export default {
     font-size:11px;
     padding-left: 18px;
     padding-top: 5px;
+  }
+
+  /deep/ [data-v-6be48e57] .van-icon-records::before{
+    color: #999;
+    position: absolute;
+    top:-41px;
+    left:290px
+  }
+
+  /deep/ [data-v-6be48e57] .van-icon-delete::before{
+    color: #999;
+    position: absolute;
+    top:-40px;
+    left:330px
   }
 </style>

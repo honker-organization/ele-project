@@ -1,24 +1,27 @@
 <template>
   <div class="personal">
     <!-- 登录时头部 -->
-    <!-- <div class="header">
+    <div class="header" v-if="username">
       <div class="header-center">
-        <div class="avatar">
-          <img src="./images/touxiang.webp" alt="">
-        </div>
+        <!-- <div class="avatar"> -->
+          <van-uploader v-model="fileList" multiple class="avatar" :max-count="1">
+            <img src="./images/touxiang.webp" alt="">
+          </van-uploader>
+          
+        <!-- </div> -->
         <div class="personal-information">
-          <div class="username">334a13c85</div>
+          <div class="username">{{username}}</div>
           <div class="phone">
             <van-icon name="phone-o" />
-            137****3909
+            {{username}}
           </div>
         </div>
         <van-icon class="arrow" name="arrow" />
       </div>
-    </div> -->
+    </div>
 
     <!-- 未登录时头部 -->
-    <div class="header">
+    <div class="header" v-else>
       <router-link to="/login">
         <div class="header-center">
         <div class="avatar">
@@ -43,45 +46,45 @@
     <!-- 内容区 -->
     <div class="details-column">
       <ul class="address">
-        <li>
+        <li @touchend="$router.push('/myAddress')">
           <van-icon class="manager" name="manager-o" />
-          <p>我的地址</p>
+          <p >我的地址</p>
           <van-icon class="arrow" name="arrow" />
         </li>
       </ul>
       <ul class="gold">
         <li>
-          <van-icon class="manager" name="manager-o" />
-          <p>我的地址</p>
+          <van-icon class="manager" name="diamond" />
+          <p>金币商城</p>
           <van-icon class="arrow" name="arrow" />
         </li>
         <li>
-          <van-icon class="manager" name="manager-o" />
-          <p>我的地址</p>
+          <van-icon class="manager" name="point-gift" />
+          <p>分享拿20元现金</p>
           <van-icon class="arrow" name="arrow" />
         </li>
       </ul>
       <ul class="customer-service">
         <li>
-          <van-icon class="manager" name="manager-o" />
-          <p>我的地址</p>
+          <van-icon class="manager" name="service" />
+          <p>我的客服</p>
           <van-icon class="arrow" name="arrow" />
         </li>
         <li>
-          <van-icon class="manager" name="manager-o" />
-          <p>我的地址</p>
+          <van-icon class="manager" name="wap-home" />
+          <p>下载饿了么APP</p>
           <van-icon class="arrow" name="arrow" />
         </li>
         <li>
-          <van-icon class="manager" name="manager-o" />
-          <p>我的地址</p>
+          <van-icon class="manager" name="shop-collect" />
+          <p>规则中心</p>
           <van-icon class="arrow" name="arrow" />
         </li>
       </ul>
     </div>
     <div class="privacy">隐私政策</div>
     <!-- 底部导航 -->
-    <div class="tabbar">
+   <!-- <div class="tabbar">
       <div class="tabbar-switch">
         <van-icon class="manager" name="manager-o" />
         <div class="item active">首页</div>
@@ -98,7 +101,7 @@
         <van-icon class="manager" name="manager-o" />
         <div class="item">我的</div>
       </div>
-  </div>
+  </div>-->
   </div>
 </template>
 
@@ -107,18 +110,37 @@
     name: 'Personal',
     data() {
       return {
-        msg:{}
+        username:null,
+        fileList: [],
       }
     },
     mounted(){
-      // console.log(this.$bus)
-      this.$bus.$on('showUserInfo', userInfo => this.msg = userInfo)
+      // console.log(JSON.parse(localStorage.getItem('USERNAME_KEY')))
+      this.setUsername()
     },
+    methods:{
+      setUsername(){
+        this.username = JSON.parse(localStorage.getItem('USERNAME_KEY'))
+        this.username = this.username.slice(0,3) + '****' + this.username.slice(7,11)
+      },
+      afterRead(file) {
+      // 此时可以自行将文件上传至服务器
+        console.log(file);
+      },
+    }
     
   }
 </script>
 
 <style lang="less" scoped>
+  /deep/.van-uploader__preview-image{
+    border-radius: 50%;
+    top: -7px;
+    left: -10px;
+  }
+  /deep/.van-uploader__preview-delete{
+    display: none;
+  }
   .personal{
     position: relative;
     width: 100%;
@@ -205,7 +227,7 @@
           .manager{
             padding-left: 5px;
             font-size: 20px;
-            color: blue;
+            color: #2395FF;
           }
           p{
             text-indent:-150px;
@@ -229,7 +251,7 @@
           .manager{
             padding-left: 5px;
             font-size: 20px;
-            color: blue;
+            color: #2395FF;
           }
           p{
             text-indent:-150px;
@@ -253,7 +275,7 @@
           .manager{
             padding-left: 5px;
             font-size: 20px;
-            color: blue;
+            color: #2395FF;
           }
           p{
             text-indent:-150px;

@@ -10,7 +10,7 @@ function setImagePath (arr) {
   }
   return arr.map(item => {
     const http = 'https://cube.elemecdn.com/'
-    const image = item.restaurant.image_path
+    const image = item.restaurant.image_path 
     const oneTitle = image.slice(0, 1)
     const twoTitle = image.slice(1, 3)
     const newStr = image.slice(3)
