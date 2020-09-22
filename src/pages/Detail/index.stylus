@@ -168,8 +168,18 @@
     background-color: #333
     .cart-order
       color #999
+      .total
+        font-size: 38px
+        color: white
     .cart-pay
       color: white
+      .settlement
+        width 210px
+        line-height 96px
+        background-color: #38ca73
+        font-size: 30px
+        color: white
+        text-align: center
 // .container
 //   width 375px
 //   overflow: hidden  

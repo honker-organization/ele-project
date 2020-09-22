@@ -59,6 +59,10 @@ Vue.prototype.$api = api;
 
 Vue.config.productionTip = false;
 
+//这是一个瀑布流滚动插件
+import VirtualCollection from "vue-virtual-collection";
+Vue.use(VirtualCollection);
+
 import "@/mock/mock-detail";
 
 import { List } from "vant";

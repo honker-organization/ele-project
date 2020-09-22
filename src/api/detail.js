@@ -15,8 +15,8 @@ export const updateFood = (id, num, remarks) =>
   Ajax.patch(`/chicken/${id}`, { num, remarks });
 
 //请求新增菜品
-export const reqAddFood = (id, num, name, price, remarks = "") =>
-  Ajax.post(`/chicken`, { id, num, name, price, remarks });
+export const reqAddFood = ({ foodId, num, name, Oriprice, actPrice, actNum }) =>
+  Ajax.post(`/chicken`, { id: foodId, num, name, Oriprice, actPrice, actNum });
 //请求获取已点餐详情
 export const reqFoods = () => Ajax.get("/chicken");
 

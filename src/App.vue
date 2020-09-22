@@ -1,6 +1,7 @@
 <template>
   <div>
-    <Detail />
+    <!-- <Detail /> -->
+    <Delicious />
     <router-view></router-view>
   </div>
 </template>
