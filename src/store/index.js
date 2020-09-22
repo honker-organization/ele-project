@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import personal from './personal.js'
 import login from '@/store/login'
-
+import hongbao from '@/store/hongbao'
 Vue.use(Vuex)
 
 const state = {}
@@ -20,6 +20,7 @@ export default new Vuex.Store({
   getters,
   modules:{
     personal,
-    login
+    login,
+    hongbao
   }
 })

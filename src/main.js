@@ -3,7 +3,7 @@ import App from './App.vue'
 import router from '@/router'
 import store from '@/store'
 import api from '@/api'
-import { NavBar, CellGroup, Toast, Popup, Icon, DropdownMenu, Skeleton, DropdownItem, Search, IndexBar, IndexAnchor, Cell, Button, Field, Form } from 'vant'
+import { Tag ,Card,NavBar, CellGroup, Toast, Popup, Icon, DropdownMenu, Skeleton, DropdownItem, Search, IndexBar, IndexAnchor, Cell, Button, Field, Form,Uploader,Tab, Tabs } from 'vant'
 import './config/rem'
 
 // 引入mock，让mock.js生效
@@ -24,6 +24,11 @@ Vue
   .use(CellGroup)
   .use(Popup)
   .use(Toast)
+  .use(Uploader)
+  .use(Tab)
+  .use(Tabs)
+  .use(Card )
+  .use(Tag)
 Vue.prototype.$api = api
 
 Vue.config.productionTip = false
