@@ -1,6 +1,7 @@
 <template>
   <div>
-    <Detail />
+    <!-- <Detail /> -->
+    <router-view></router-view>
     <!-- <Delicious /> -->
     <!-- <router-view></router-view> -->
     <!--<Myaddress></Myaddress> -->
@@ -12,12 +13,12 @@
 </template>
 
 <script>
-import Delicious from "@/pages/Delicious";
-import Detail from "@/pages/Detail";
+// import Delicious from '@/pages/Delicious'
+// import Detail from '@/pages/Detail'
 export default {
-  name: "App",
-  components: { Delicious, Detail },
-};
+  name: 'App',
+  // components: { Delicious, Detail },
+}
 </script>
 
 <style></style>
