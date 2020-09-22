@@ -2,19 +2,21 @@
 <template>
   <div class="wrapper">
     <!-- 头部 -->
-    <div class="headerContainer">
+    <div class="headerContainer" >
       <!-- #0093ff -->
-      <div class="word" @click="$router.push('/changeAddress')">
+      <div @touchend="toselectShippingAddress" class="word" >
         <van-icon size="20px" name="location" color="#fff" />
         <span class="text" v-if="!position.name">正在识别地址</span>
         <span class="text" v-else>{{position.name}}</span>
         <van-icon name="arrow-down" color="#fff" />
       </div>
-      <van-search class="search" placeholder="请输入搜索关键词" input-align="center" />
+
+        <van-search class="search" placeholder="请输入搜索关键词" input-align="center" @touchend="$router.push('/')"/>
+      
     </div>
     <!-- 导航栏 -->
     <div class="navContainer">
-      <div class="navItem" v-for="item in foodList" :key="item.id">
+      <div class="navItem" v-for="item in foodList" :key="item.id" @touchend="$router.push('/icondetail')">
         <van-skeleton
           :loading="foodLoading"
           title-width="45px"
@@ -76,6 +78,11 @@ export default {
         this.foodLoading = false
       }, 1000)
     },
+
+    toselectShippingAddress(){
+      console.log(111)
+      this.$router.push('/selectshippingaddress')
+    }
   },
 }
 </script>
@@ -91,6 +98,9 @@ export default {
 .wrapper {
   // 头部样式
   .headerContainer {
+    position: sticky;
+    top:0;
+    z-index: 99;
     height: 90px;
     display: flex;
     flex-direction: column;

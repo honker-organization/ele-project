@@ -17,5 +17,5 @@ VueRouter.prototype.replace = function replace (location) {
 
 export default new VueRouter({
   routes
-  // mode:'history'
+ 
 })

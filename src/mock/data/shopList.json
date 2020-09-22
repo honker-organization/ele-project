@@ -3,6 +3,8 @@
   "items": [
     {
       "restaurant": {
+        "value": 1,
+        "checked":false,
         "act_tag": 0,
         "activities": [],
         "address": null,
@@ -134,6 +136,8 @@
     },
     {
       "restaurant": {
+        "value":1,
+        "checked": false,
         "act_tag": 0,
         "activities": [
           {
@@ -300,6 +304,8 @@
     },
     {
       "restaurant": {
+        "value": 1,
+        "checked": false,
         "act_tag": 0,
         "activities": [
           {
@@ -527,6 +533,8 @@
     },
     {
       "restaurant": {
+        "value": 1,
+        "checked": false,
         "act_tag": 0,
         "activities": [
           {
@@ -678,6 +686,8 @@
     },
     {
       "restaurant": {
+        "value": 1,
+        "checked": false,
         "act_tag": 0,
         "activities": [
           {
@@ -950,6 +960,8 @@
     },
     {
       "restaurant": {
+        "value": 1,
+        "checked": false,
         "act_tag": 0,
         "activities": [
           {
@@ -1174,6 +1186,8 @@
     },
     {
       "restaurant": {
+        "value": 1,
+        "checked": false,
         "act_tag": 0,
         "activities": [
           {
@@ -1398,6 +1412,8 @@
     },
     {
       "restaurant": {
+        "value": 1,
+        "checked": false,
         "act_tag": 0,
         "activities": [
           {

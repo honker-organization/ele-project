@@ -3,7 +3,31 @@ import App from './App.vue'
 import router from '@/router'
 import store from '@/store'
 import api from '@/api'
-import { NavBar, CellGroup, Toast, Popup, Icon, DropdownMenu, Skeleton, DropdownItem, Search, IndexBar, IndexAnchor, Cell, Button, Field, Form } from 'vant'
+import {
+  NavBar,
+  CellGroup,
+  Toast,
+  PullRefresh,
+  Popup,
+  Icon,
+  DropdownMenu,
+  Loading,
+  Skeleton,
+  DropdownItem,
+  Search,
+  IndexBar,
+  IndexAnchor,
+  Cell,
+  Button,
+  Field,
+  Form,
+  Tabbar,
+  TabbarItem,
+  Sticky,
+  Checkbox,
+  Stepper,
+  Tag
+} from 'vant'
 import './config/rem'
 
 // 引入mock，让mock.js生效
@@ -24,6 +48,14 @@ Vue
   .use(CellGroup)
   .use(Popup)
   .use(Toast)
+  .use(Tabbar)
+  .use(TabbarItem)
+  .use(Loading)
+  .use(PullRefresh)
+  .use(Sticky)
+  .use(Checkbox)
+  .use(Stepper)
+  .use(Tag)
 Vue.prototype.$api = api
 
 Vue.config.productionTip = false
@@ -33,6 +65,8 @@ import {
 } from 'vant';
 
 Vue.use(List);
+
+Vue.prototype.$bus = this
 
 new Vue({
   beforeCreate () {

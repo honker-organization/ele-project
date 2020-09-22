@@ -2,22 +2,18 @@
    <!-- 商品卡片-->
     <div class="cardContainer">
         <div class="img">
-          <img src="https://img.yzcdn.cn/vant/ipad.jpeg">
+          <img :src="shopItem.image_path">
         </div>
 
         <div class="word">
           <div class="title">
-            三两粉(福田店)
+           {{shopItem.name}}
           </div>
 
           <div class="starContainer">
               <div class="star">
-                <van-icon name="star"  color="#FCCA3C" />
-                <van-icon name="star" color="#FCCA3C"/>
-                <van-icon name="star" color="#FCCA3C"/>
-                <van-icon name="star" color="#FCCA3C"/>
-                <van-icon name="star-o" style="margin-right:20px"/>
-                <span class="month">4.5 月售1700单
+                <Star :rating="shopItem.rating"></Star>
+                <span class="month">{{shopItem.rating}}月售{{shopItem.recent_order_num}}单
                   
                 </span>
                 
@@ -30,26 +26,26 @@
           
           <div class="distribution">
             <div class="price">
-              ￥20起送 | 配送￥2
+              ￥{{shopItem.piecewise_agent_fee.rules[0].price}}起送 | 配送￥{{shopItem.piecewise_agent_fee.rules[0].fee}}
             </div>
             <div class="minute">
-              1.94km | 40分钟
+              {{shopItem.distance}}km |{{shopItem.order_lead_time}}分钟
             </div>
           </div>
           <div class="rice">
-            奶茶果汁
+            {{shopItem.flavors[0].name}}
           </div>
 
           <div class="tagContainer">
               <div class="tagItem">
-              <van-tag  type="warning" size="small" style="margin-right:10px;font-size:11px">减</van-tag>
-              <span>满25元减9元，满40元减12元，满55元减18元，满88元减26元，满120元减36元</span>
+              <van-tag  type="warning" size="small" style="margin-right:10px;font-size:11px">{{shopItem.supports[0].icon_name}}</van-tag>
+              <span>{{shopItem.supports[0].description}}</span>
             </div>
 
-            <div class="tagItem">
+            <!-- <div class="tagItem">
               <van-tag  type="primary" size="small" style="margin-right:10px;font-size:11px">配</van-tag>
               <span >配送费立减5元</span>
-            </div>
+            </div> -->
           </div>
           
           
@@ -61,23 +57,18 @@
 
 <script>
 import { Icon, Card ,Tag } from 'vant';
-import reqShopList from '@/api/index'
+import Star from '@/components/star'
+
 export default {
-  name: '',
+  name: 'Card',
   components:{
     [Icon.name]:Icon,
     [Card.name]: Card,
     [Tag.name]: Tag,
+    Star
   },
-  mounted(){
-    this.getShopList()
-  },
-  methods:{
-    async getShopList(){
-      const res = await reqShopList()
-      console.log(res)
-    }
-  }
+  props:['shopItem']
+ 
 }
 </script>
 
@@ -89,12 +80,12 @@ export default {
         display: flex;
         margin-top: 10px;
         .img{
-          width: 100px;
-          height: 100px;
+          width: 80px;
+          height: 80px;
 
           img{
-           width: 75px;
-          height: 75px;
+           width: 60px;
+          height: 60px;
           }
         }
 
@@ -139,6 +130,7 @@ export default {
           line-height: 18px;
           width: 50px;
           text-align: center;
+          height: 16px;
         } 
       }
 

@@ -59,7 +59,7 @@
 </template>
 
 <script>
-import {reqGetVerificationCode} from '@/api'
+// import {reqGetVerificationCode} from '@/api'
 export default {
   name: 'Login',
   data() {
@@ -72,30 +72,31 @@ export default {
       isShow:true,
     };
   },
-  // mounted(){
-  //   console.log(this.$bus)
-  // },  
+  mounted(){
+    // console.log(this.$bus)
+    // 获取
+  },  
   methods: {
     onSubmit(values) {
       // console.log('submit', values);
     },
-    //点击获取验证码事件
-    getVerificationCode(){
-      this.$refs.Form.validate(['phoneNumber','password']).then(async res => {
-        // console.log(this.phoneNumber)
-        // 请求验证码
-        // await reqGetVerificationCode()
-        let show = setInterval(() => {
-          this.isShow = false
-          this.time -= 1
-          if(this.time<=0){
-            clearInterval(show)
-            this.time = 6
-            this.isShow = true
-          }
-        },1000)
-      })
-    },
+    // //点击获取验证码事件
+    // getVerificationCode(){
+    //   this.$refs.Form.validate(['phoneNumber','password']).then(async res => {
+    //     // console.log(this.phoneNumber)
+    //     // 请求验证码
+    //     // await reqGetVerificationCode()
+    //     let show = setInterval(() => {
+    //       this.isShow = false
+    //       this.time -= 1
+    //       if(this.time<=0){
+    //         clearInterval(show)
+    //         this.time = 6
+    //         this.isShow = true
+    //       }
+    //     },1000)
+    //   })
+    // },
     //登录
     async login(){
       let {phoneNumber,password,captcha_code} = this

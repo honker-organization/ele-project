@@ -43,45 +43,45 @@
     <!-- 内容区 -->
     <div class="details-column">
       <ul class="address">
-        <li>
+        <li @touchend="$router.push('/myAddress')">
           <van-icon class="manager" name="manager-o" />
-          <p>我的地址</p>
+          <p >我的地址</p>
           <van-icon class="arrow" name="arrow" />
         </li>
       </ul>
       <ul class="gold">
         <li>
-          <van-icon class="manager" name="manager-o" />
-          <p>我的地址</p>
+          <van-icon class="manager" name="diamond" />
+          <p>金币商城</p>
           <van-icon class="arrow" name="arrow" />
         </li>
         <li>
-          <van-icon class="manager" name="manager-o" />
-          <p>我的地址</p>
+          <van-icon class="manager" name="point-gift" />
+          <p>分享拿20元现金</p>
           <van-icon class="arrow" name="arrow" />
         </li>
       </ul>
       <ul class="customer-service">
         <li>
-          <van-icon class="manager" name="manager-o" />
-          <p>我的地址</p>
+          <van-icon class="manager" name="service" />
+          <p>我的客服</p>
           <van-icon class="arrow" name="arrow" />
         </li>
         <li>
-          <van-icon class="manager" name="manager-o" />
-          <p>我的地址</p>
+          <van-icon class="manager" name="wap-home" />
+          <p>下载饿了么APP</p>
           <van-icon class="arrow" name="arrow" />
         </li>
         <li>
-          <van-icon class="manager" name="manager-o" />
-          <p>我的地址</p>
+          <van-icon class="manager" name="shop-collect" />
+          <p>规则中心</p>
           <van-icon class="arrow" name="arrow" />
         </li>
       </ul>
     </div>
     <div class="privacy">隐私政策</div>
     <!-- 底部导航 -->
-    <div class="tabbar">
+   <!-- <div class="tabbar">
       <div class="tabbar-switch">
         <van-icon class="manager" name="manager-o" />
         <div class="item active">首页</div>
@@ -98,7 +98,7 @@
         <van-icon class="manager" name="manager-o" />
         <div class="item">我的</div>
       </div>
-  </div>
+  </div>-->
   </div>
 </template>
 
@@ -205,7 +205,7 @@
           .manager{
             padding-left: 5px;
             font-size: 20px;
-            color: blue;
+            color: #2395FF;
           }
           p{
             text-indent:-150px;
@@ -229,7 +229,7 @@
           .manager{
             padding-left: 5px;
             font-size: 20px;
-            color: blue;
+            color: #2395FF;
           }
           p{
             text-indent:-150px;
@@ -253,7 +253,7 @@
           .manager{
             padding-left: 5px;
             font-size: 20px;
-            color: blue;
+            color: #2395FF;
           }
           p{
             text-indent:-150px;

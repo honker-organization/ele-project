@@ -1,12 +1,16 @@
-import {reqLogin} from '@/api'
+import {reqLogin,reqGetVerificationCode} from '@/api'
 const state = {
-  userInfo: {}
+  userInfo: {},
+  code:{}
 }
 
 const mutations = {
   RECEIVEUSERINFO(state,userInfo){
     state.userInfo = userInfo
   },
+  RECEIVECODE(state,code){
+    state.code = code
+  }
 }
 
 const actions = {
@@ -16,6 +20,13 @@ const actions = {
       commit('RECEIVEUSERINFO',result.data)
     }
   },
+
+  // 获取验证码
+  async getCode({commit}){
+    const result = await reqGetVerificationCode()
+
+    commit('RECEIVECODE',result)
+  }
 }
 
 const getters = {}

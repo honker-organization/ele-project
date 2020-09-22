@@ -2,24 +2,18 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import personal from './personal.js'
 import login from '@/store/login'
-
+import selectShippingAddress from '@/store/selectShippingAddress'
+import shop from '@/store/shop'
 Vue.use(Vuex)
 
-const state = {}
 
-const mutations = {}
-
-const actions = {}
-
-const getters = {}
 
 export default new Vuex.Store({
-  state,
-  mutations,
-  actions,
-  getters,
+ 
   modules:{
     personal,
-    login
+    login,
+    selectShippingAddress,
+    shop
   }
 })

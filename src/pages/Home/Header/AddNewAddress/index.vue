@@ -12,10 +12,7 @@
         placeholder="姓名"
         :rules="[{ required: true, message: '请填写姓名' }]"
       />
-      <div class="sex">
-        <van-button type="default" @click.prevent>先生</van-button>
-        <van-button type="info" @click.prevent>女士</van-button>
-      </div>
+     
       <van-field
         v-model="phone"
         name="电话"
@@ -31,21 +28,26 @@
         :rules="[{ required: true, message: '请填写地址' }]"
       />
       <van-field
-        v-model="username"
+        v-model="homeHouse"
         name="门牌号"
         label="门牌号"
         placeholder="10号楼5层501室222"
         :rules="[{ required: true, message: '请填写门牌号' }]"
       />
+       <div class="sex">
+        <button :class="call === 1 ? 'active' : ''" @touchstart='hangdleCall(1)'>先生</button>
+        <button :class="call === 2 ? 'active' : ''" @touchstart='hangdleCall(2)'>女士</button>
+      </div>
 
-      <div style="margin: 16px;">
-        <van-button block type="info" native-type="submit">确定</van-button>
+      <div style="margin: 16px;" >
+        <button type="submit" class="sub" @touchstart="hangdleSubmit">确定</button>
       </div>
     </van-form>
   </div>
 </template>
 
 <script>
+import {reqUpadteShippingAddress} from '@/api'
 export default {
   data() {
     return {
@@ -53,9 +55,62 @@ export default {
       phone: '', // 手机号
       address: '', // 地址
       homeHouse: '', // 门牌号
+      call:1,//称呼
+      id:"",
     }
   },
+  mounted(){
+    this.upadteAddress()
+  },
   methods: {
+    // 更新地址
+    upadteAddress(){
+      
+        
+        if( this.$route.query.myAddress){
+
+             const addressData = this.$route.query.myAddress
+
+            console.log(JSON.parse(addressData))
+            
+            
+      
+            let  {name, id, sex, address, phone, homeHouse} = JSON.parse(addressData)
+            this.username = name
+            this.phone = phone
+            this.call = sex
+            this.homeHouse = homeHouse
+            this.id = id
+            this.address = address
+        }
+       
+       
+    },
+
+    // 切换称呼事件回调
+    hangdleCall(call){
+      // console.log(call)
+      this.call = call
+    },
+
+    // 添加地址
+   async hangdleSubmit(){
+
+      let id =  Date.now()
+
+      let {username,phone,address,call,homeHouse} = this
+      // console.log(username,phone,address,homeHouse,call)
+      const name = username
+      const sex = call
+    
+      let res = await reqUpadteShippingAddress({name,id,sex,address,phone,homeHouse})
+
+      console.log(res)
+      
+      // Toast.success('添加地址成功');
+     
+      this.$router.push('/selectShippingAddress?address=true')
+    },
     onSubmit() {},
   },
 }
@@ -91,10 +146,30 @@ export default {
   justify-content: center;
   align-items: center;
   margin: 10px 0;
-  /deep/.van-button--normal {
+  /deep/button {
     width: 80px;
     height: 30px;
     margin-right: 10px;
+    background: none;
+    border:0;
+    border: 1px solid #333;
+
+    &.active{
+      background: #1989FA;
+       border:0;
+       color: #fff;
+    }
   }
+
+  
 }
+
+.sub{
+    width: 100%;
+    height: 40px;
+     background: #1989FA;
+    border:0;
+    color: #fff;
+    font-size: 15px;
+  }
 </style>

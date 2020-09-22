@@ -1,44 +1,36 @@
 {
   "posts": [
     {
-      "id": 1,
-      "title": "潮味食客汤粉.炒粉",
-      "picUrl":"https://cube.elemecdn.com/2/9c/f0e9c303c82e18977fff2f80f1016jpeg.jpeg?x-oss-process=image/format,webp/resize,w_130,h_130,m_fixed",
-      "star": "4.1月售1363单",
-      "price":"￥20元起送 | 免配送费",
-      "rice":"米粉米线",
-      "tag1":"配",
-      "tagTitle1":"配送费立减2.5元",
-      "tag2":"特",
-      "tagTitle2":"特价商品1元起",
-      "minute":"2.52km | 44分钟"
+      "name": "康伟",
+      "id": 1600710068662,
+      "sex": 1,
+      "address": "西部硅谷",
+      "phone": "1587956445",
+      "homeHouse": "304"
     },
     {
-      "id": 2,
-      "title": "尊宝披萨(红树湾店)",
-      "picUrl": "https://cube.elemecdn.com/4/db/24c17cc6b366e5f7ee769d4c041c0JPEG.JPEG",
-      "star": "4.7月售803单",
-      "price": "￥22元起送 | 免配送费",
-      "rice": "披萨",
-      "tag1": "配",
-      "tagTitle1": "配送费立减2元",
-      "tag2": "特",
-      "tagTitle2": "特价商品0.1元起",
-      "minute": "2.01km | 49分钟"
+      "name": "黄海兵",
+      "id": 1600753958964,
+      "sex": 1,
+      "address": "广东省深圳市宝安区",
+      "phone": "132658955655",
+      "homeHouse": "205"
     },
     {
-      "id": 3,
-      "title": "(红树湾店)",
-      "picUrl": "https://cube.elemecdn.com/4/db/24c17cc6b366e5f7ee769d4c041c0JPEG.JPEG",
-      "star": "4.7月售803单",
-      "price": "￥22元起送 | 免配送费",
-      "rice": "披萨",
-      "tag1": "配",
-      "tagTitle1": "配送费立减2元",
-      "tag2": "特",
-      "tagTitle2": "特价商品0.1元起",
-      "minute": "2.01km | 49分钟"
+      "name": "林镇",
+      "id": 1600753984940,
+      "sex": 1,
+      "address": "广东省深圳市宝安区",
+      "phone": "4632654562",
+      "homeHouse": "505"
     },
+    {
+      "name": "aaa",
+      "id": 1600754017548,
+      "sex": 1,
+      "address": "宝安区飞机场",
+      "phone": "46133555",
+      "homeHouse": "10"
+    }
   ]
-  
 }

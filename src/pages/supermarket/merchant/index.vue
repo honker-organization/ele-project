@@ -30,7 +30,9 @@
 			</div>
 		</div>
 		<!-- 商家列表 -->
+
 		<div class="main">
+		
 			<div class="merchantWrap">
 				<div class="merchantList">
 					<div class="leftImg">
@@ -135,13 +137,20 @@
 					</div>
 				</div>
 			</div>
+		
 		</div>
+	
 	</div>
 </template>
 
 <script>
 export default {
 	name: "Merchant",
+	data(){
+		return {
+			loading: false,
+		}
+	}
 };
 </script>
 
