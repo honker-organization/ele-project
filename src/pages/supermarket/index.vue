@@ -1,7 +1,7 @@
 <template>
 	<div class="superMarket">
-		<Header></Header>
-		<NavIcon></NavIcon>
+		<Header ></Header>
+		<NavIcon :iconList="iconList"></NavIcon>
 		<SaleDay></SaleDay>
 		<Merchant></Merchant>
 	</div>
@@ -13,6 +13,7 @@ import NavIcon from "./navIcon";
 import SaleDay from "./saleDay";
 import Merchant from "./merchant";
 import Vue from "vue";
+import service from '@/ajax/mockAjax'
 import { Icon, Search, Sticky, TabbarItem } from "vant";
 
 Vue.use(Sticky)
@@ -32,8 +33,13 @@ export default {
 		return {
 			active: "",
 			value: "",
+			iconList:[]
 		};
 	},
+	async mounted(){
+		const result = await service('/getSuperMarketIcon')
+		this.iconList = result.data.items
+	}
 };
 </script>
 

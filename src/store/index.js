@@ -2,6 +2,9 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import personal from './personal.js'
 import login from '@/store/login'
+import superMarket from '@/store/superMarket'
+import orderList from '@/store/orderList'
+import address from '@/store/address'
 
 Vue.use(Vuex)
 
@@ -20,6 +23,9 @@ export default new Vuex.Store({
   getters,
   modules:{
     personal,
-    login
+    login,
+    superMarket,
+    orderList,
+    address
   }
 })

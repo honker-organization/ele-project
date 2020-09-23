@@ -1,11 +1,11 @@
 <template>
 	<!-- 按钮 -->
 	<div class="navIcon">
-		<div class="iconItem">
-			<img src="../../../assets/images/cart.png" alt="" />
-			<span>超市</span>
+		<div class="iconItem" v-for="(item) in iconList" :key="item.id">
+			<img :src="item.imgUrl" alt="" />
+			<span>{{item.name}}</span>
 		</div>
-		<div class="iconItem">
+		<!-- <div class="iconItem">
 			<img src="../../../assets/images/kuang.png" alt="" />
 			<span>便利店</span>
 		</div>
@@ -40,7 +40,7 @@
 		<div class="iconItem">
 			<img src="../../../assets/images/vip.png" alt="" />
 			<span>大牌钜惠</span>
-		</div>
+		</div> -->
 	</div>
 </template>
 
@@ -54,6 +54,7 @@ Vue.use(Sticky)
 	.use(Search);
 export default {
 	name: "navItem",
+	props:['iconList']
 };
 </script>
 

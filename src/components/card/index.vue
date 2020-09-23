@@ -70,13 +70,13 @@ export default {
     [Tag.name]: Tag,
   },
   mounted(){
-    this.getShopList()
+    // this.getShopList()
   },
   methods:{
-    async getShopList(){
-      const res = await reqShopList()
-      console.log(res)
-    }
+    // async getShopList(){
+    //   const res = await reqShopList()
+    //   console.log(res)
+    // }
   }
 }
 </script>
@@ -159,7 +159,7 @@ export default {
       .rice{
         font-size: 10px;
         border: 1px solid #666666;
-        width: 40px;
+        width: 60px;
         text-align: center;
         margin-bottom: 5px;
       }

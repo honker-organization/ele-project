@@ -1,9 +1,9 @@
 <template>
   <div>
     <van-icon name="arrow-left" size="30px" color="#666" />
-    <van-search show-action placeholder="请输入商家、商品名称">
+    <van-search show-action placeholder="请输入搜索关键词" v-model="value">
       <template #action>
-        <div>搜索</div>
+        <div @click="searchInfo">搜索</div>
       </template>
     </van-search>
     <div class="hot">热门搜索</div>
@@ -14,6 +14,17 @@
 <script>
 export default {
   name: '',
+  data(){
+    return {
+      value:''
+    }
+  },
+  methods:{
+    searchInfo(){
+      console.log(111)
+      console.log(this.value)
+    }
+  }
 }
 </script>
 

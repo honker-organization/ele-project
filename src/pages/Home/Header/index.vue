@@ -4,17 +4,18 @@
     <!-- 头部 -->
     <div class="headerContainer">
       <!-- #0093ff -->
-      <div class="word" @click="$router.push('/changeAddress')">
+      <!-- <div class="word" @click="$router.push('/changeAddress')"> -->
+      <div class="word" @click="$router.push('/selectshippingaddress')">
         <van-icon size="20px" name="location" color="#fff" />
-        <span class="text" v-if="!position.name">正在识别地址</span>
+        <span class="text" v-if="!position.name">请新增地址...</span>
         <span class="text" v-else>{{position.name}}</span>
         <van-icon name="arrow-down" color="#fff" />
       </div>
-      <van-search class="search" placeholder="请输入搜索关键词" input-align="center" />
+      <van-search class="search" placeholder="请输入搜索关键词" input-align="center" @click="toSearchPage"/>
     </div>
-    <!-- 导航栏 -->
+    <!-- 导航栏icon -->
     <div class="navContainer">
-      <div class="navItem" v-for="item in foodList" :key="item.id">
+      <div class="navItem" v-for="item in foodList" :key="item.id" @click="toIconDetail">
         <van-skeleton
           :loading="foodLoading"
           title-width="45px"
@@ -76,7 +77,17 @@ export default {
         this.foodLoading = false
       }, 1000)
     },
-  },
+    //点击首页icon  去往内页
+    toIconDetail(){
+      console.log(111)
+      this.$router.push('/icondetail')
+    },
+    //去往搜索页
+    toSearchPage(){
+      this.$router.push({path:'/search'})
+      // addnewaddress
+    }
+  }
 }
 </script>
 

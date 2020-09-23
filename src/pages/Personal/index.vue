@@ -43,7 +43,7 @@
     <!-- 内容区 -->
     <div class="details-column">
       <ul class="address">
-        <li>
+        <li @click="$router.push('/selectshippingaddress')">
           <van-icon class="manager" name="manager-o" />
           <p>我的地址</p>
           <van-icon class="arrow" name="arrow" />

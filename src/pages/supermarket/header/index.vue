@@ -3,13 +3,14 @@
 		<div class="header">
 			<!-- 头部搜索 -->
 			<div class="top">
-				<img class="back" src="../../../assets/images/back.png" alt="" />
+				<img class="back" src="../../../assets/images/back.png" alt="" @click="toHome" />
 				<span class="title">超市便利</span>
 				<!-- <input class="serach" type="text" placeholder="买一赠一限量抢" placeholder-clas="placeholder" /> -->
 				<van-search
 					class="serach"
 					v-model="value"
 					placeholder="新鲜车厘子"
+					@touchend="$router.push('/search')"
 				/>
 				<img class="cart" src="../../../assets/images/shopcart.png" alt="" />
 			</div>
@@ -45,6 +46,11 @@ export default {
 		return {
 			active: "",
 			value: "",
+		}
+	},
+	methods:{
+		toHome(){
+			this.$router.replace({name:'home'})
 		}
 	}
 }

@@ -9,7 +9,7 @@
 import Header from './Header'
 import Recommend from './Recommend'
 export default {
-  name: '',
+  name: 'Home',
   components: {
     Header,
     Recommend,

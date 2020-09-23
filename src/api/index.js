@@ -1,6 +1,10 @@
 
 import Ajax from '@/ajax/Ajax'
 
+import cxh from './position-cxh.js'
+export default {
+  cxh
+}
 import request from '@/ajax/Ajax'
 
 //获取手机验证码  h5.ele的接口

@@ -4,11 +4,11 @@
     <van-tabs background="#0093FF" line-width="50px" line-height="2px" color="white" class="van-tabs" style="height:80px">
         <van-tab title-active-color="red" title-style="color:#FFFFFF;font-size:30px;height:70px;background:#0093FF" v-for="(item,index) in tab" :title="item" :key='index+1'>
           
-          <div class="down">
+          <!-- <div class="down">
               <button>
                 <van-icon name="arrow-down" />
               </button>
-          </div>
+          </div> -->
 
            <div class="navContainer">
              <van-dropdown-menu  active-color="#3190E8">

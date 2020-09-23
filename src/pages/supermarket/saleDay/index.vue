@@ -7,47 +7,21 @@
 			<span>查看更多></span>
 		</div>
 		<div class="goodsList">
-			<div class="good">
-				<img src="../../../assets/images/sale.png" alt="" />
+			<div class="good" v-for="merchant in merchantList" :key="merchant.id">
+				<img :src="merchant.imgUrl" alt="" />
 				<div class="price">
-					<span>￥1</span>
-					<span>￥8</span>
+					<span>￥{{merchant.distance}}</span>
+					<span>￥{{merchant.min}}</span>
 				</div>
 			</div>
-			<div class="good">
-				<img src="../../../assets/images/sale.png" alt="" />
-				<div class="price">
-					<span>￥1</span>
-					<span>￥8</span>
-				</div>
-			</div>
-			<div class="good">
-				<img src="../../../assets/images/sale.png" alt="" />
-				<div class="price">
-					<span>￥1</span>
-					<span>￥8</span>
-				</div>
-			</div>
-			<div class="good">
-				<img src="../../../assets/images/sale.png" alt="" />
-				<div class="price">
-					<span>￥1</span>
-					<span>￥8</span>
-				</div>
-			</div>
-			<div class="good">
-				<img src="../../../assets/images/sale.png" alt="" />
-				<div class="price">
-					<span>￥1</span>
-					<span>￥8</span>
-				</div>
-			</div>
+
 		</div>
 	</div>
 </template>
 
 <script>
 import Vue from "vue";
+import {mapState} from 'vuex'
 import { Icon, Search, Sticky, TabbarItem } from "vant";
 Vue.use(Sticky)
 	.use(Icon)
@@ -56,6 +30,9 @@ Vue.use(Sticky)
 	.use(Search);
 export default {
 	name: "saleDay",
+	computed: {
+		...mapState({merchantList:state=>state.superMarket.merchantList})
+	},
 };
 </script>
 
@@ -89,21 +66,28 @@ export default {
 		}
 	}
 	.goodsList {
-		padding-top: 10px;
+		padding-top: 20px;
 		display: flex;
 		justify-content: space-between;
+		overflow: auto;
+		height: 110px;
 		.good {
-			// margin-right: 10px;
+			margin-right: 10px;
+			flex-shrink: 0;
 			img {
-				width: 54px;
-				height: 70px;
+				width: 60px;
+				height: 80px;
 			}
 			.price {
 				span:nth-child(1) {
+					font-size: 14px;
 					color: red;
+					padding-right: 4px;
+					font-weight: bolder;
 				}
 				span:nth-child(2) {
 					color: #dddddd;
+					text-decoration:line-through
 				}
 			}
 		}
